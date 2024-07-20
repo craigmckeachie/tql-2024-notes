@@ -45,9 +45,10 @@
 
 - lowercase
 
-## Lab
+## Labs
 
 - Exercise 1
+- Exercise 2
 
 ## Form Elements
 
@@ -60,6 +61,9 @@
 - Label
 - Button
 - Dropdown (select > option)
+
+## Labs
+- Exercise 3
 
 ## Exercise 1 (layout.html)
 

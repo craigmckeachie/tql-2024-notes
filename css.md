@@ -74,3 +74,10 @@ A combinator is something that explains the relationship between the selectors.
 - absolute
 
 ## Colors
+
+
+## Exercise 1
+
+- style `header` to match design
+- style `nav` to match design
+
