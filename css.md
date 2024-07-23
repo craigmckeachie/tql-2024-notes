@@ -10,24 +10,24 @@
 
 ## Using Stylesheets
 
-1. Inline CSS
-
-- styles only used on one element
-
-1. Internal CSS
-
-- styles only used on one page
-
-1. External CSS
-
-- styles used on more than one page (global)
-- usually but not always the right choice
+- Inline CSS
+  - styles only used on one element
+- Internal CSS
+  - styles only used on one page
+- External CSS
+  - styles used on more than one page (global)
+  - usually but not always the right choice
 
 ## Selectors
+
+### Common
 
 - element
 - class
 - id
+
+### Less Common
+
 - attribute
 - pseudo selectors
 - pseudo elements
@@ -93,14 +93,12 @@ A numerical ranking of selectors.
 ## Text & Typography
 
 - font-family
-  -font stacks
-  -custom fonts (ex. Google fonts)
+  - font stacks
+  - custom fonts (ex. Google fonts)
 - color = font color
 - font-size
 - line-height
 - font-weight
-
-## Spacing
 
 ## Colors
 
