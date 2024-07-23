@@ -55,24 +55,7 @@ Between the simple selectors, we can include a combinator.
 - border
 - margin
 
-## Specificity
-
-A numerical ranking of selectors.
-
-- Diagrams
-  - SpeciFISHity (not a typo)
-- Devtools
-
-## The Cascade
-
-1. inline
-2. internal
-3. external
-4. browser
-5. specificity
-6. if specificity same, lower in the file wins
-
-## CSS Display
+## Display
 
 - inline
 - block
@@ -108,6 +91,23 @@ A numerical ranking of selectors.
 - use strong brand colors to highlight or accent your design but don't overuse them (for example as a background for entire app)
 - design a site in grayscale (a range of gray shades from white to black), then add brand colors at the end
 - maintain high contrast
+
+## Specificity
+
+A numerical ranking of selectors.
+
+- Diagrams
+  - SpeciFISHity (not a typo)
+- Devtools
+
+## The Cascade
+
+1. inline
+2. internal
+3. external
+4. browser
+5. specificity
+6. if specificity same, lower in the file wins
 
 ## Exercise 1
 
