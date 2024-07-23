@@ -104,6 +104,13 @@ A numerical ranking of selectors.
 
 ## Colors
 
+- HEX (old and reliable)
+- RGB (newer, supports more colors)
+- HSL (newest, may not be supported in all browsers)
+- use strong brand colors to highlight or accent your design but don't overuse them (for example as a background for entire app)
+- design a site in grayscale (a range of gray shades from white to black), then add brand colors at the end
+- maintain high contrast
+
 ## Exercise 1
 
 - style `header` to match design
