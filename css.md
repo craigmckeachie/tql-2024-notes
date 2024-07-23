@@ -73,6 +73,10 @@ Between the simple selectors, we can include a combinator.
 
 - eventually
 
+## Media Queries
+
+- eventually
+
 ## Text & Typography
 
 - font-family
