@@ -42,7 +42,7 @@ Between the simple selectors, we can include a combinator.
 - adjacent sibling selector (+)
 - general sibling selector (~)
 
-## Spacing
+## Sizing Units
 
 - relative (rem, %, em)
 - absolute (px, pt, in)
