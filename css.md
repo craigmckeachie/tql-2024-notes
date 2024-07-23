@@ -34,7 +34,8 @@
 
 ## CSS Combinators
 
-A combinator is something that explains the relationship between the selectors.
+A CSS selector can contain more than one simple selector.
+Between the simple selectors, we can include a combinator.
 
 - descendant selector (space)
 - child selector (>)
@@ -55,6 +56,8 @@ A combinator is something that explains the relationship between the selectors.
 - margin
 
 ## Specificity
+
+A numerical ranking of selectors.
 
 - Diagrams
   - SpeciFISHity (not a typo)
