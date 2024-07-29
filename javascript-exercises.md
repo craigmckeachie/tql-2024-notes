@@ -7,8 +7,8 @@ Create a subfolder named Functions. These exercises should be placed there.
 Write a script named simple_functions.js. In it, define three functions:
 
 1. The first should be named favoriteThings(). In it, use a console.log() statement to display 3 lines listing your name, your favorite movie, and your favorite musician/band.
-2. The second should be named whyImHere(). In it, display a sentence that describes why you joined this "Learning to Code" program.
-3. The last should be named favoritePlace(). In it, display a sentence that describes one of your favorite places to visit and why.
+1. The second should be named whyImHere(). In it, display a sentence that describes why you joined this "Learning to Code" program.
+1. The last should be named favoritePlace(). In it, display a sentence that describes one of your favorite places to visit and why.
    Below where you coded the three functions, call each of your functions.
 
 DON'T FORGET to commit and push your repo.
@@ -38,3 +38,16 @@ Now that you've defined your functions:
 - call displayReceipt() three times. In one call, you should overpay the bill, in another you should pay the bill exactly, and in the last, you should underpay the bill.
 
 DON'T FORGET to commit and push your repo.
+
+## Exercise 3
+
+### Objects
+
+1. Create an object with at least 5 properties that represents a **truck** and assign it to a variable.
+2. Create a function called `displayTruck` that takes a truck object as a parameter and displays only3 of the properties on separate lines with a label for each.
+
+```
+TruckId: fsk
+Size: 40x34ft
+Type: Flatbed
+```
