@@ -15,3 +15,32 @@
 1. Then change the name of the props coming in to another name. Verify it works.
 1. Add an age prop and display it.
 1. If you aren't already use destructuring in the function parameters so that you don't have to say `props.first` etc...
+
+1. Pass the props from an object into the HTML tag for the component
+
+```js
+function Greeter({ first, last, age }) {
+  // let { first, last, age } = props;
+  // console.log(JSON.stringify(props, null, ""));
+
+  return (
+    <h2>
+      Hello {first} {last}. He is {age} years old.
+    </h2>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <Greeter first="Kanye" last="West" age="47" />
+);
+```
+
+## Exercise 3
+
+1. Create an `App` component and have React render it instead of `Greeter`
+2. In the `App` component start with a div with a paragraph of "lorem ipsum" inside of it.
+3. Test and verify that works.
+4. Add an HTML `button` element below the paragraph and have the button text say "Display"
+5. Create a function named display which call the function `alert("Boo")`
+6. Associate the function to the click event of the button
+7. Verify it works.
