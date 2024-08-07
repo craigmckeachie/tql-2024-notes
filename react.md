@@ -148,8 +148,19 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 1.  Create an App component
 1.  Create a MoviesPage component and render it inside the App component
 1.  Create a state variable in the MoviesPage component and assign it to the provided array of movies
-1.  Create a MovieList component and render it inside the MoviesPage component - pass the movies from the page to the list component - loop through the movies and display each movie name in a div - style the movie data as a card
-    Here are the movies.
+1.  Create a MovieList component and render it inside the MoviesPage component
+
+- pass the movies from the page to the list component
+- loop through the movies and display each movie name in a div
+- style the movie data as a card
+- the movies array is below.
+
+1. Verify the movies display
+
+## Exercise 7
+
+1. Create a MovieCard component and pass in the movie object and display the data just as you did in the list. You can remove the HTML/JSX to display the card from the list and put it in the MovieCard.
+1. Verify the display still works
 
 ```js
 const movies = [
@@ -335,3 +346,12 @@ const movies = [
   },
 ];
 ```
+
+## Exercise 8
+
+1. Add an "Edit" button in each movie card
+1. Write a function inside the component (it's an event handler) named `handleEdit`
+   - `console.log` out the `movie` object passed into the card that was clicked
+1. Associate the handleEdit function with the click of the button
+1. Verify clicking the button displays the movie
+1. In the MoviesList component
