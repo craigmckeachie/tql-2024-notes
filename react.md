@@ -137,8 +137,19 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 ## Exercise 5
 
 1. Create a dropdown menu composed of a button and an unordered list of menu items
-2. When you click the button hide or show the menu
-3. Achieve this using all 3 different syntaxes:
+1. When you click the button hide or show the menu
+1. Achieve this using all 3 different syntaxes:
    - if
    - ?
    - &&
+
+## Exercise 6
+
+1.  Create an App component
+1.  Create a MoviesPage component and render it inside the App component
+1.  Create a state variable in the MoviesPage component and assign it to the provided array of movies
+1.  Create a MovieList component and render it inside the MoviesPage component
+    - pass the movies from the page to the list component
+    - loop through the movies and display each movie name in a div
+    - style the movie data as a card
+1. 
