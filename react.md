@@ -45,8 +45,88 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 6. Associate the function to the click event of the button
 7. Verify it works.
 
+```js
+//component function
+function App() {
+  //code
+  function display() {
+    alert("Boo");
+  }
 
-# Exercise 4
+  //html
+  return (
+    <div>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
+        necessitatibus minima accusamus. Quidem perferendis eligendi ipsum eum
+        repellat, nihil totam, vero, similique suscipit quibusdam architecto.
+        Esse dolores voluptates odit laborum.
+      </p>
+      <button onClick={display}>Display</button>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+```
+
+### State Example
+
+```js
+//component function
+function App() {
+  // let message = "";
+  const [message, setMessage] = React.useState("");
+  //code
+  function display() {
+    // message = "Hey yo!";
+    setMessage("Hey yo!");
+  }
+
+  //html
+  return (
+    <div>
+      <button onClick={display}>Display</button>
+      <p> {message} </p>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+```
+
+```js
+//component function
+function App() {
+  // let message = "";
+  const [message, setMessage] = React.useState("");
+
+  //code
+  function display() {
+    // message = "Hey yo!";
+    setMessage("Hey yo!");
+  }
+
+  function reset() {
+    setMessage("");
+  }
+
+  //html
+  return (
+    <div>
+      <button onMouseOver={display} onMouseOut={reset}>
+        Display
+      </button>
+      <p> {message} </p>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+```
+
+## Exercise 4
+
 1. Add another `button` element to the page and have the button text say "Display Message"
 1. Create a state variable named `message` using the `useState` hook and initialize the message to "" (empty string).
 1. Create another paragraph on the page and have it display the message state variable
@@ -54,3 +134,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 1. Associate the click event of the "Display Message" button with the `displayMessage` function.
 1. Verify it works.
 
+## Exercise 5
+
+1. Create a dropdown menu composed of a button and an unordered list of menu items
+2. When you click the button hide or show the menu
+3. Achieve this using all 3 different syntaxes:
+   - if
+   - ?
+   - &&
