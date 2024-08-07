@@ -10,8 +10,8 @@
 1. In `ReactDemos` folder
 1. Update the `Greeter` component in React to return an `h2` with "Hello Calvin Broadus" inside of the element. The name should come through props.
 1. Call it using this code
-   `    ReactDOM.createRoot(document.getElementById("root")).render(<Greeter first="Calvin" last="Broadus" />);
-   `
+   `   ReactDOM.createRoot(document.getElementById("root")).render(<Greeter first="Calvin" last="Broadus" />);`
    1.Refresh index.html page to see the result.
 1. Then change the name of the props coming in to another name. Verify it works.
 1. Add an age prop and display it.
+1. If you aren't already use destructuring in the function parameters so that you don't have to say `props.first` etc...
