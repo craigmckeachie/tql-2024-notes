@@ -21,3 +21,37 @@
   - Multiple column layouts are a stretch goal
 
 ## Style Guide
+
+- Grey Background
+  ```
+  class="bg-body-tertiary"
+  ```
+- Left Navigation Icons:
+
+  ```html
+  <svg class="bi pe-none me-2" width="16" height="16" fill="#FFFFFF">
+    <use xlink:href="./images/bootstrap-icons.svg#cart"></use>
+  </svg>
+
+  <svg class="bi pe-none me-2" width="16" height="16" fill="#FFFFFF">
+    <use xlink:href="./images/bootstrap-icons.svg#grid"></use>
+  </svg>
+
+  <svg class="bi pe-none me-2" width="16" height="16" fill="#FFFFFF">
+    <use xlink:href="./images/bootstrap-icons.svg#building"></use>
+  </svg>
+
+  <svg class="bi pe-none me-2" width="16" height="16" fill="#FFFFFF">
+    <use xlink:href="./images/bootstrap-icons.svg#people"></use>
+  </svg>
+  ```
+
+- Buttons
+  - blue
+    ```
+    class="btn btn-primary"
+    ```
+  - white with blue outline
+    ```
+    class="btn btn-outline-primary
+    ```
