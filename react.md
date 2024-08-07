@@ -44,3 +44,13 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 5. Create a function named display which calls the function `alert("Boo")`
 6. Associate the function to the click event of the button
 7. Verify it works.
+
+
+# Exercise 4
+1. Add another `button` element to the page and have the button text say "Display Message"
+1. Create a state variable named `message` using the `useState` hook and initialize the message to "" (empty string).
+1. Create another paragraph on the page and have it display the message state variable
+1. Create a function named `displayMessage` that sets the `message` state variable to "Message in the bottle"
+1. Associate the click event of the "Display Message" button with the `displayMessage` function.
+1. Verify it works.
+
