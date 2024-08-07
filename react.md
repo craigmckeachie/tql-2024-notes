@@ -41,6 +41,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 2. In the `App` component start with a div with a paragraph of "lorem ipsum" inside of it.
 3. Test and verify that works.
 4. Add an HTML `button` element below the paragraph and have the button text say "Display"
-5. Create a function named display which call the function `alert("Boo")`
+5. Create a function named display which calls the function `alert("Boo")`
 6. Associate the function to the click event of the button
 7. Verify it works.
