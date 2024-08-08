@@ -1,5 +1,3 @@
-## Basics
-
 ## Exercise 1: First Component
 
 1. In `ReactDemos` folder
@@ -134,14 +132,14 @@
 1. In the `App` component
    - create a state variable for the currently signed in user called `user`
      - initialize it to `undefined`
-     - make a copy of the state variable line and on the new line initialize user state to the follow user object
+     - make a copy of the state variable line and in the duplicated line initialize user state to the following user object
        ```
        {
          first: "James"
          last: "Roday"
        }
        ```
-     - comment out the last line where you set the user to an object for now
+     - comment out the last line where you set the user to an object (for now)
 1. Create an `AccountHeader` component
    - render it inside the `App` component
    - pass the `user` state variable as a prop into `AccountHeader`
@@ -152,11 +150,12 @@
      - if `user` display user's first and last name properties inside the
      - else display Sign In link
 1. Open the page and verify the link is shown
-1. Comment out the line setting user state to undefined and uncomment the line setting in to a user object
+1. Comment out the line setting user state to undefined and uncomment the line setting it to a user object
 
-- Reload and verify the user's first and last name is shown
+   - Reload and verify the user's first and last name is shown
 
 ## Exercise 6B: More Conditional Rendering
+
 1. Create a dropdown menu composed of a button and an unordered list of menu items
 1. When you click the button hide or show the menu
 1. Achieve this using all 3 different syntaxes:
