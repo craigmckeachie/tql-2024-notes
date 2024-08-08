@@ -126,7 +126,7 @@
    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
    ```
 
-## Exercise 6: Conditional Rendering
+## Exercise 5: Conditional Rendering
 
 1. Create an `App` component and render it inside the root element
 1. In the `App` component
@@ -135,7 +135,7 @@
      - make a copy of the state variable line and in the duplicated line initialize user state to the following user object
        ```
        {
-         first: "James"
+         first: "James",
          last: "Roday"
        }
        ```
@@ -154,6 +154,42 @@
 
    - Reload and verify the user's first and last name is shown
 
+#### `main.js`
+
+```js
+const { useState } = React;
+
+function App() {
+  const [user, setUser] = useState(undefined);
+  // const [user, setUser] = useState({
+  //   first: "James",
+  //   last: "Roday",
+  // });
+
+  return (
+    <>
+      <AccountHeader user={user} />
+    </>
+  );
+}
+
+function AccountHeader(props) {
+  return (
+    <>
+      {props.user ? (
+        <span>
+          Welcome, {props.user.first} {props.user.last}
+        </span>
+      ) : (
+        <a href="#">Sign In</a>
+      )}
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+```
+
 <!-- ## Exercise 6B: More Conditional Rendering
 
 1. Create a dropdown menu composed of a button and an unordered list of menu items
@@ -163,7 +199,7 @@
    - ?
    - && -->
 
-## Exercise 7: Child to Parent Communication
+## Exercise 6: Child to Parent Communication
 
 1. Start with the following code
 
@@ -214,48 +250,66 @@
 
 ---
 
-### Exercise 8: useEffect
+### `main.js`
 
-1. **Set Up the HTML and CSS:**
+```js
+const { useState } = React;
 
-   - Update your `index.html` file to include a link to a `styles.css` stylesheet inside the `<head>` tag as follows:
-     ```html
-     <link rel="stylesheet" href="styles.css" />
-     ```
-   - Add the following CSS to your `styles.css` file:
-     ```css
-     .card {
-       border: 1px solid lightgray;
-       padding: 2rem;
-       width: 18rem;
-     }
-     ```
+function FruitListItem(props) {
+  return (
+    <li>
+      {props.fruit.name} | <button onClick={props.onRemove}>Delete</button>
+    </li>
+  );
+}
 
-2. **Create the React Component:**
+function FruitList() {
+  //code
 
-   - Create a component named `App` and render it inside the root element.
-   - Inside the `App` component:
-     - Initialize a state variable called `busy` to `false`.
-     - Initialize another state variable called `teams` to an empty array.
-   - Create a function named `loadTeams` that does the following:
-     - Sets `busy` to `true`.
-     - After a delay of 1 second, sets `busy` back to `false` and updates the `teams` state with an array of NBA teams (you can use the provided `nbaTeams` array).
+  //data
+  const [fruits, setFruits] = useState([
+    { id: 1, name: "apple" },
+    { id: 2, name: "orange" },
+    { id: 3, name: "blueberry" },
+    { id: 4, name: "banana" },
+    { id: 5, name: "kiwi" },
+  ]);
 
-3. **Use useEffect to Load Data:**
+  //functions/event handlers
 
-   - Use the `useEffect` hook to call `loadTeams` when the component mounts.
+  function removeFruit(fruit) {
+    let updatedFruits = fruits.filter((f) => f.id !== fruit.id);
+    setFruits(updatedFruits);
+  }
 
-4. **Render the Teams with Styling:**
+  //html
+  return (
+    <ul>
+      {fruits.map((fruit) => (
+        <FruitListItem
+          key={fruit.id}
+          fruit={fruit}
+          onRemove={() => removeFruit(fruit)}
+        />
+      ))}
+    </ul>
+  );
+}
 
-   - Inside the `App` component's JSX:
-     - Conditionally render a paragraph element with "Loading..." text when `busy` is `true`.
-     - Map over the `teams` array to display each team’s name and division inside a `div` element with a `className` of `"card"`.
+function App() {
+  return <FruitList />;
+}
 
-5. **Run the Application:**
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+```
 
-   - Test the application to ensure that the "Loading..." text appears briefly before the list of NBA teams is displayed, with the `.card` styling applied to each team.
+### Exercise 7: Displaying Teams with Simulated API Call
 
-   <!-- #### `main.js`
+This exercise demonstrates how to handle asynchronous data fetching and display the results.
+
+1. **Starter Code:**
+
+   - Use the following starter code to set up the fake API and define the `App` component:
 
    ```js
    const { useState, useEffect } = React;
@@ -267,66 +321,235 @@
      { name: "Dallas Mavericks", division: "Southwest" },
    ];
 
+   const teamAPI = {
+     list() {
+       return new Promise((resolve) => {
+         setTimeout(() => {
+           resolve(nbaTeams);
+         }, 1000);
+       });
+     },
+   };
+
+   // Define the App component here
    function App() {
-     const [busy, setBusy] = useState(false);
-     const [teams, setTeams] = useState([]);
-     function loadTeams() {
-       setBusy(true);
-       setTimeout(() => {
-         setBusy(false);
-         setTeams(nbaTeams);
-       }, 1000);
-     }
-
-     useEffect(loadTeams, []);
-
-     return (
-       <div>
-         {busy && <p>Loading...</p>}
-         {teams.map((team) => (
-           <div className="card" key={team.name}>
-             <strong>{team.name}</strong>
-             <div>{team.division}</div>
-           </div>
-         ))}
-       </div>
-     );
+     // Your code will go here
    }
 
    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
    ```
 
-   #### `styles.css`
+2. **Define the `App` Component:**
 
-   ```css
-   .card {
-     border: 1px solid lightgray;
-     padding: 2rem;
-     width: 18rem;
-   }
-   ``` -->
+   - Inside `App`:
+     - Use the `useState` hook to create two state variables:
+       - `busy` to track whether data is being loaded (initialize it to `false`).
+       - `teams` to store the list of teams (initialize it to an empty array).
+     - Define an `async` function named `loadTeams` that:
+       - Sets `busy` to `true`.
+       - Uses `await` to get data from `teamAPI.list()`.
+       - Sets `busy` to `false` after the data is loaded.
+       - Updates the `teams` state with the retrieved data.
+     - Use the `useEffect` hook to call `loadTeams` when the component mounts (an empty dependency array should be used).
 
+3. **Render the Data:**
 
+   - Inside the `App` component’s return statement:
+     - Conditionally render a "Loading..." message if `busy` is `true`.
+     - Map over the `teams` array and render each team in a `div` with the class name `card`. Each `div` should display the team’s name and division.
 
-## Exercise 9: Forms | Controlled Components
+4. **Add Styles:**
+
+   - Create a `styles.css` file in your project directory.
+   - Define the `.card` class in `styles.css` with the following styles:
+
+     ```css
+     .card {
+       border: 1px solid lightgray;
+       padding: 2rem;
+       width: 18rem;
+     }
+     ```
+
+   - Ensure that `styles.css` is linked in your `index.html` file:
+
+     ```html
+     <link rel="stylesheet" href="styles.css" />
+     ```
+
+ <!-- #### `main.js`
+
+ ```js
+ const { useState, useEffect } = React;
+
+const nbaTeams = [
+  { name: "Los Angeles Lakers", division: "Pacific" },
+  { name: "Chicago Bulls", division: "Central" },
+  { name: "Miami Heat", division: "Southeast" },
+  { name: "Dallas Mavericks", division: "Southwest" },
+];
+
+const teamAPI = {
+  list() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(nbaTeams);
+      }, 1000);
+    });
+  },
+};
+
+function App() {
+  const [busy, setBusy] = useState(false);
+  const [teams, setTeams] = useState([]);
+  async function loadTeams() {
+    setBusy(true);
+    let data = await teamAPI.list();
+    setBusy(false);
+    setTeams(data);
+  }
+
+  useEffect(function () {
+    loadTeams();
+  }, []);
+
+  return (
+    <div>
+      {busy && <p>Loading...</p>}
+      {teams?.map((team) => (
+        <div className="card" key={team.name}>
+          <strong>{team.name}</strong>
+          <div>{team.division}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+ ```     -->
+
+### Exercise 8: Building a Contact Us Form
+
+In this exercise, you'll build a Contact Us form with state management for multiple form fields and handle form submission.
+
+1. **Set Up the Form Component:**
+
+   - Create a component named `ContactUsForm` and render it inside the root element.
+   - Inside the component:
+     - Initialize three state variables: `department`, `message`, and `agreedToTerms`.
+       - `department` is initialized to an empty string.
+       - `message` is initialized to an empty string.
+       - `agreedToTerms` is initialized to `false`.
+     - Use `React.useState` to manage these state variables.
+
+2. **Create the Form Layout:**
+
+   - Create a `<form>` element and associate a `handleSubmit` function with the form’s `onSubmit` event handler.
+   - Inside the form:
+     - Add a `<select>` element for selecting a department with options for Human Resources, Public Relations, and Support. Register the `select` with the `department` state.
+     - Add a `<textarea>` element for the message input, binding it to the `message` state.
+     - Add a checkbox input with a label "I agree to the terms and conditions," and bind it to the `agreedToTerms` state.
+     - Add a submit button labeled "Send."
+
+3. **Handle Form Submission:**
+
+   - Implement the `handleSubmit` function to prevent the default form submission behavior using `event.preventDefault()`.
+   - Inside `handleSubmit`, log the form data to the console by converting the state to a string using the `stateToString` function.
+
+4. **State to String Conversion:**
+
+   - Implement the `stateToString` function to convert the form state into a JSON string for logging.
+
+5. **Testing the Form:**
+   - Run the application and verify that the form behaves as expected:
+     - When you select a department, enter a message, and check the "I agree to the terms and conditions" checkbox, the form state should update accordingly.
+     - When you click "Send," the form data should be logged to the console as a JSON string.
+
+---
+
+<!-- #### `main.js`
+
+```js
+function ContactUsForm() {
+  const [department, setDepartment] = React.useState("");
+  const [message, setMessage] = React.useState("");
+  const [agreedToTerms, setAgreedToTerms] = React.useState(false);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log("submitting", stateToString());
+  }
+
+  function stateToString() {
+    return JSON.stringify(
+      {
+        department,
+        message,
+        agreedToTerms,
+      },
+      null,
+      " "
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <select
+        name="department"
+        value={department}
+        onChange={(e) => setDepartment(e.target.value)}
+      >
+        <option value="">Select...</option>
+        <option value="hr">Human Resources</option>
+        <option value="pr">Public Relations</option>
+        <option value="support">Support</option>
+      </select>
+      <br />
+      <br />
+      <textarea
+        name="message"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        cols="30"
+        rows="10"
+      />
+      <br />
+      <input
+        type="checkbox"
+        name="agreedToTerms"
+        checked={agreedToTerms}
+        onChange={(e) => setAgreedToTerms(e.target.checked)}
+      />
+      I agree to the terms and conditions.
+      <br />
+      <button>Send</button>
+    </form>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<ContactUsForm />);
+``` -->
+
+## Exercise 9: Forms | Validation
 
 sign in
 
-## Exercise 10: Forms | Validation
+## Exercise 10: Forms | Data with React Hook Form
 
 sign in
 
-## Exercise 11: Forms | Data with React Hook Form
+## Exercise 11: Forms | Validation with React Hook Form
 
 sign in
 
-## Exercise 12: Forms | Validation with React Hook Form
+## Exercise 12: Promises and async await
 
-sign in
+## Exercise 13: fetch API
 
-## Exercise 13: Promises and async await
+## Exercise 14: Router
 
-## Exercise 14: fetch API
+```
 
-## Exercise 15: Router
 ```
