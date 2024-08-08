@@ -212,10 +212,47 @@
    - you need to pass the prop fruit for a given `FruitListItem` to the onRemove function so you will need to wrap `onRemove` in an arrow function to delay the calling of the function until the button is clicked
 1. Test the app and verify the appropriate `fruit` is removed when the **delete** button is clicked
 
-## Exercise 8: Side Effects
 
-- fake api call with loading indicator
-- fake api call with pagination
+
+---
+
+### Exercise 8: useEffect
+
+1. **Set Up the HTML and CSS:**
+   - Update your `index.html` file to include a link to a `styles.css` stylesheet inside the `<head>` tag as follows:
+     ```html
+     <link rel="stylesheet" href="styles.css" />
+     ```
+   - Add the following CSS to your `styles.css` file:
+     ```css
+     .card {
+       border: 1px solid lightgray;
+       padding: 2rem;
+       width: 18rem;
+     }
+     ```
+
+2. **Create the React Component:**
+   - Create a component named `App` and render it inside the root element.
+   - Inside the `App` component:
+     - Initialize a state variable called `busy` to `false`.
+     - Initialize another state variable called `teams` to an empty array.
+   - Create a function named `loadTeams` that does the following:
+     - Sets `busy` to `true`.
+     - After a delay of 1 second, sets `busy` back to `false` and updates the `teams` state with an array of NBA teams (you can use the provided `nbaTeams` array).
+
+3. **Use useEffect to Load Data:**
+   - Use the `useEffect` hook to call `loadTeams` when the component mounts.
+
+4. **Render the Teams with Styling:**
+   - Inside the `App` component's JSX:
+     - Conditionally render a paragraph element with "Loading..." text when `busy` is `true`.
+     - Map over the `teams` array to display each team’s name and division inside a `div` element with a `className` of `"card"`.
+
+5. **Run the Application:**
+   - Test the application to ensure that the "Loading..." text appears briefly before the list of NBA teams is displayed, with the `.card` styling applied to each team.
+
+
 
 ## Exercise 9: Forms | Controlled Components
 
