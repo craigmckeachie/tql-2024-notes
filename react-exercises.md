@@ -150,15 +150,93 @@
      - if `user` display user's first and last name properties inside the
      - else display Sign In link
 1. Open the page and verify the link is shown
-1. Comment out the line setting user state to undefined and uncomment the line setting it to a user object
+1. Comment out the line setting user state to `undefined` and uncomment the line setting it to a `user` object
 
    - Reload and verify the user's first and last name is shown
 
-## Exercise 6B: More Conditional Rendering
+<!-- ## Exercise 6B: More Conditional Rendering
 
 1. Create a dropdown menu composed of a button and an unordered list of menu items
 1. When you click the button hide or show the menu
 1. Achieve this using all 3 different syntaxes:
    - if
    - ?
-   - &&
+   - && -->
+
+## Exercise 7: Child to Parent Communication
+
+1. Start with the following code
+
+   ```js
+   const { useState } = React;
+
+   function FruitListItem(props) {
+     return (
+       <li>
+         {props.fruit.name} | <button>Delete</button>
+       </li>
+     );
+   }
+
+   function FruitList() {
+     const [fruits, setFruits] = useState([
+       { id: 1, name: "apple" },
+       { id: 2, name: "orange" },
+       { id: 3, name: "blueberry" },
+       { id: 4, name: "banana" },
+       { id: 5, name: "kiwi" },
+     ]);
+
+     return (
+       <ul>
+         {fruits.map((fruit) => (
+           <FruitListItem key={fruit.id} fruit={fruit} />
+         ))}
+       </ul>
+     );
+   }
+
+   function App() {
+     return <FruitList />;
+   }
+
+   ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+   ```
+
+1. Add the function `removeFruit` inside the `FruitList` component
+   - the function should take a `fruit `as a parameter
+   - use the Array `filter` method to filter out the `fruit` that should be removed and return a new array into a variable you create named `updatedFruits`
+   - use the state setter function `setFruits` to update the `fruits` state with the `updatedFruits` array
+1. Pass the `removeFruit` function as a prop into each `FruitListItem`. Name the prop `onRemove`
+1. Associate the click event of the button in `FruitListItem` with the function coming into props named `onRemove`
+   - you need to pass the prop fruit for a given `FruitListItem` to the onRemove function so you will need to wrap `onRemove` in an arrow function to delay the calling of the function until the button is clicked
+1. Test the app and verify the appropriate `fruit` is removed when the **delete** button is clicked
+
+## Exercise 8: Side Effects
+
+- fake api call with loading indicator
+- fake api call with pagination
+
+## Exercise 9: Forms | Controlled Components
+
+sign in
+
+## Exercise 10: Forms | Validation
+
+sign in
+
+## Exercise 11: Forms | Data with React Hook Form
+
+sign in
+
+## Exercise 12: Forms | Validation with React Hook Form
+
+sign in
+
+## Exercise 13: Promises and async await
+
+## Exercise 14: fetch API
+
+## Exercise 15: Router
+
+
