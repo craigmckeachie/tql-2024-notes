@@ -469,7 +469,7 @@ In this exercise, you'll build a Contact Us form with state management for multi
 
 ---
 
-<!-- #### `main.js`
+#### `main.js`
 
 ```js
 function ContactUsForm() {
@@ -530,7 +530,7 @@ function ContactUsForm() {
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<ContactUsForm />);
-``` -->
+```
 
 ### Exercise 9: Building a Validated Contact Us Form with Bootstrap
 
