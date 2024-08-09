@@ -377,10 +377,10 @@ This exercise demonstrates how to handle asynchronous data fetching and display 
      <link rel="stylesheet" href="styles.css" />
      ```
 
- #### `main.js`
+#### `main.js`
 
- ```js
- const { useState, useEffect } = React;
+```js
+const { useState, useEffect } = React;
 
 const nbaTeams = [
   { name: "Los Angeles Lakers", division: "Pacific" },
@@ -427,8 +427,7 @@ function App() {
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-
- ```    
+```
 
 ### Exercise 8: Building a Contact Us Form
 
@@ -460,7 +459,8 @@ In this exercise, you'll build a Contact Us form with state management for multi
 
 4. **State to String Conversion:**
 
-   - Implement the `stateToString` function to convert the form state into a JSON string for logging.
+   - Implement a `stateToString` function to convert the form state into a JSON string for logging to the page.
+   - Add a pre tag and call `JSON.stringify()` passing an object with the various variables you are tracking in state.
 
 5. **Testing the Form:**
    - Run the application and verify that the form behaves as expected:
@@ -723,8 +723,13 @@ In this exercise, you will use React Hook Form to manage form state and validati
 
    - Include the Bootstrap CSS link in your `index.html` file, ensuring it appears before your custom `styles.css` file:
      ```html
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-     <link rel="stylesheet" href="styles.css">
+     <link
+       rel="stylesheet"
+       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+       crossorigin="anonymous"
+     />
+     <link rel="stylesheet" href="styles.css" />
      ```
 
 4. **Set Up the Form Component:**
@@ -973,8 +978,6 @@ function App() {
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 ``` -->
 
-
-
 Certainly! Here are the updated directions for Exercise 1, integrating the new `db.json` data:
 
 ### Exercise 12: Setting Up a REST API with json-server
@@ -1012,14 +1015,22 @@ In this exercise, you'll set up a REST API using `json-server` to simulate fetch
          { "id": 15, "name": "Memphis Grizzlies", "division": "Southwest" },
          { "id": 16, "name": "Miami Heat", "division": "Southeast" },
          { "id": 17, "name": "Milwaukee Bucks", "division": "Central" },
-         { "id": 18, "name": "Minnesota Timberwolves", "division": "Northwest" },
+         {
+           "id": 18,
+           "name": "Minnesota Timberwolves",
+           "division": "Northwest"
+         },
          { "id": 19, "name": "New Orleans Pelicans", "division": "Southwest" },
          { "id": 20, "name": "New York Knicks", "division": "Atlantic" },
          { "id": 21, "name": "Oklahoma City Thunder", "division": "Northwest" },
          { "id": 22, "name": "Orlando Magic", "division": "Southeast" },
          { "id": 23, "name": "Philadelphia 76ers", "division": "Atlantic" },
          { "id": 24, "name": "Phoenix Suns", "division": "Pacific" },
-         { "id": 25, "name": "Portland Trail Blazers", "division": "Northwest" },
+         {
+           "id": 25,
+           "name": "Portland Trail Blazers",
+           "division": "Northwest"
+         },
          { "id": 26, "name": "Sacramento Kings", "division": "Pacific" },
          { "id": 27, "name": "San Antonio Spurs", "division": "Southwest" },
          { "id": 28, "name": "Toronto Raptors", "division": "Atlantic" },
@@ -1050,7 +1061,6 @@ In this exercise, you'll set up a REST API using `json-server` to simulate fetch
 
    - Open your browser and navigate to `http://localhost:9000/teams` to see the list of NBA teams served by `json-server`. You should see a JSON response with all the teams.
 
-
 With this setup, you now have a `json-server` instance running that provides a REST API for NBA teams.
 
 ### Exercise 13: Updating `teamAPI` to Use a REST API
@@ -1058,6 +1068,7 @@ With this setup, you now have a `json-server` instance running that provides a R
 In this exercise, you will update the `teamAPI` to fetch data from a REST API served by `json-server` and handle errors gracefully using utility functions.
 
 #### Starter Code:
+
 You will start with the following code in `main.js`:
 
 > If the code looks familiar it is the solution to Exercise 7
@@ -1157,17 +1168,21 @@ export function delay(ms) {
 #### Steps:
 
 1. **Install Dependencies:**
+
    - Ensure that you have `json-server` installed and running on port 9000. If not, refer to Exercise 12 for setup instructions.
-    > Note you will still need `npm start` running in a separate terminal to server the front-end React code
+     > Note you will still need `npm start` running in a separate terminal to server the front-end React code
 
 2. **Update `teamAPI` to Use the REST API:**
+
    - Modify the `teamAPI.list` function to fetch data from your `json-server` API.
    - Use the `fetchUtilities.js` functions `checkStatus` and `parseJSON` to handle the HTTP response and errors.
 
 3. **Handle API Errors:**
+
    - Update the `App` component to display user-friendly error messages if the API request fails. Use state to store and display any error messages.
 
 4. **Enhance the Component:**
+
    - Ensure that the component displays loading status, fetches data from the REST API, and handles any errors appropriately.
 
 5. **Verify the Application:**
@@ -1226,8 +1241,6 @@ function App() {
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 ``` -->
-
-
 
 ## Exercise 14: Router
 
