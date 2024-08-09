@@ -700,9 +700,9 @@ function App() {
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 ``` -->
 
-### Exercise 10: Integrating React Hook Form for Advanced Form Handling
+### Exercise 10: Integrating React Hook Form with Bootstrap for Advanced Form Handling
 
-In this exercise, you will enhance form management using React Hook Form. This library simplifies form validation and state management.
+In this exercise, you will use React Hook Form to manage form state and validation. Bootstrap will be used for styling the form.
 
 1. **Install React Hook Form:**
 
@@ -715,35 +715,50 @@ In this exercise, you will enhance form management using React Hook Form. This l
 
    - Add the React Hook Form script before the `main.js` script in your `index.html` file:
      ```html
-     <script src="https://unpkg.com/react-hook-form@7/dist/react-hook-form.min.js"></script>
+     <script src="/node_modules/react-hook-form/dist/index.umd.js"></script>
      <script type="text/babel" src="/main.js"></script>
      ```
 
-3. **Set Up the Form Component:**
+3. **Add Bootstrap CSS:**
 
-   - Create a component named `ContactUsForm` and render it inside the root element.
-   - Import the necessary functions from React Hook Form by declaring `const { useForm } = window.ReactHookForm;`.
+   - Include the Bootstrap CSS link in your `index.html` file, ensuring it appears before your custom `styles.css` file:
+     ```html
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+     <link rel="stylesheet" href="styles.css">
+     ```
 
-4. **Create the Form Layout:**
+4. **Set Up the Form Component:**
 
-   - Inside the `ContactUsForm` component, call `useForm()` and destructure `register`, `handleSubmit`, and `watch`.
-   - Structure your form as follows:
-     - A `<select>` element for the department with options for "Human Resources," "Public Relations," and "Support." Bind this element using `{...register('department')}`.
-     - A `<textarea>` element for the message, bound using `{...register('message')}`.
-     - A `<input type="checkbox">` element for agreeing to terms and conditions, bound using `{...register('agreeToTerms')}`.
-     - A submit button labeled "Send."
+   - Create a component named `ContactUsForm` using React Hook Form. Import the necessary functions from React Hook Form by declaring `const { useForm } = window.ReactHookForm;`.
 
-5. **Handle Form Submission:**
+5. **Create the Form Layout:**
 
-   - Implement a `send` function that receives the form data and logs it to the console.
+   - Inside the `ContactUsForm` component:
+     - Call `useForm()` and destructure `register`, `handleSubmit`, and `watch`.
+     - Structure the form as follows:
+       - A `<select>` element for the department, using `{...register('department')}`.
+       - A `<textarea>` element for the message, using `{...register('message')}`.
+       - A `<input type="checkbox">` element for agreeing to terms and conditions, using `{...register('agreeToTerms')}`.
+       - A submit button labeled "Send."
+     - Wrap the form in Bootstrap classes for styling.
+
+6. **Handle Form Submission:**
+
+   - Implement a `send` function that receives form data and logs it to the console.
    - Attach the `send` function to the form’s `onSubmit` event by passing it to `handleSubmit`.
 
-6. **Monitor Form State:**
+7. **Monitor Form State:**
 
-   - Display the current form state using `watch()` in a `<pre>` element to observe the real-time form data.
+   - Display the current form state using `watch()` in a `<pre>` element to observe the real-time form data. Use `JSON.stringify()` to format the output.
 
-7. **Testing the Form:**
-   - Run the application and verify that the form works as expected. Check the console to see the submitted form data and the form's current state displayed below it.
+8. **Wrap the Form in an App Component:**
+
+   - Create an `App` component that renders the `ContactUsForm` component inside a `div.container` for consistent Bootstrap styling.
+   - Update the root rendering to include the `App` component.
+
+9. **Testing the Form:**
+
+   - Run the application and verify that the form works as expected. Check the console for the submitted form data and observe the real-time form state displayed below the form.
 
 ---
 
@@ -760,28 +775,65 @@ function ContactUsForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(send)}>
-      <select {...register("department")}>
-        <option value="">Select...</option>
-        <option value="hr">Human Resources</option>
-        <option value="pr">Public Relations</option>
-        <option value="support">Support</option>
-      </select>
-      <br />
-      <p className="alert"></p>
-      <br />
-      <textarea {...register("message")} cols="30" rows="10" />
-      <br />
-      <input {...register("agreeToTerms")} type="checkbox" />
-      I agree to the terms and conditions.
-      <br />
-      <button>Send</button>
-      <pre>{JSON.stringify(watch())}</pre>
+    <form onSubmit={handleSubmit(send)} className="mt-4">
+      <div className="mb-3">
+        <label htmlFor="department" className="form-label">
+          Department
+        </label>
+        <select
+          id="department"
+          {...register("department")}
+          className="form-select"
+        >
+          <option value="">Select...</option>
+          <option value="hr">Human Resources</option>
+          <option value="pr">Public Relations</option>
+          <option value="support">Support</option>
+        </select>
+      </div>
+
+      <div className="mb-3">
+        <label htmlFor="message" className="form-label">
+          Message
+        </label>
+        <textarea
+          id="message"
+          {...register("message")}
+          className="form-control"
+          cols="30"
+          rows="10"
+        />
+      </div>
+
+      <div className="mb-3 form-check">
+        <input
+          id="agreeToTerms"
+          {...register("agreeToTerms")}
+          type="checkbox"
+          className="form-check-input"
+        />
+        <label htmlFor="agreeToTerms" className="form-check-label">
+          I agree to the terms and conditions.
+        </label>
+      </div>
+
+      <button type="submit" className="btn btn-primary">
+        Send
+      </button>
+      <pre className="mt-3">{JSON.stringify(watch(), null, 2)}</pre>
     </form>
   );
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<ContactUsForm />);
+function App() {
+  return (
+    <div className="container">
+      <ContactUsForm />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 ``` -->
 
 ### Exercise 11: Using React Hook Form with Bootstrap Validation
@@ -791,6 +843,7 @@ In this exercise, you'll set up form validation using React Hook Form and displa
 In this exercise, you'll use React Hook Form to handle form validation and display errors using Bootstrap 5 classes.
 
 1. **Add Bootstrap and React Hook Form Libraries:**
+
    - Install React Hook Form via npm:
      ```bash
      npm install react-hook-form
@@ -801,6 +854,7 @@ In this exercise, you'll use React Hook Form to handle form validation and displ
      ```
 
 2. **Set Up the HTML File:**
+
    - Add the Bootstrap CSS CDN link to the `index.html` file. Place it before your custom `styles.css`:
      ```html
      <link
@@ -814,11 +868,13 @@ In this exercise, you'll use React Hook Form to handle form validation and displ
    - Ensure that the Bootstrap JavaScript file is not included, as it is not required for this exercise.
 
 3. **Create the `ContactUsForm` Component:**
+
    - Use React Hook Form to manage form state and validation.
    - Replace error display with Bootstrap classes for form validation.
    - Wrap your form component in an `App` component with a Bootstrap `container`.
 
 4. **Update Your Form Component:**
+
    - Replace the custom error display with Bootstrap classes for form validation.
 
 5. **Verify Form Validation:**
@@ -916,9 +972,6 @@ function App() {
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 ``` -->
-
-
-
 
 ## Exercise 12: Promises and async await
 
