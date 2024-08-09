@@ -377,7 +377,7 @@ This exercise demonstrates how to handle asynchronous data fetching and display 
      <link rel="stylesheet" href="styles.css" />
      ```
 
- <!-- #### `main.js`
+ #### `main.js`
 
  ```js
  const { useState, useEffect } = React;
@@ -428,7 +428,7 @@ function App() {
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 
- ```     -->
+ ```    
 
 ### Exercise 8: Building a Contact Us Form
 
@@ -973,9 +973,261 @@ function App() {
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 ``` -->
 
-## Exercise 12: Promises and async await
 
-## Exercise 13: fetch API
+
+Certainly! Here are the updated directions for Exercise 1, integrating the new `db.json` data:
+
+### Exercise 12: Setting Up a REST API with json-server
+
+In this exercise, you'll set up a REST API using `json-server` to simulate fetching data for an NBA teams application.
+
+1. **Install `json-server`:**
+
+   - Install `json-server` version 0.17.0 (to avoid using the beta version) by running the following command in your project directory:
+     ```bash
+     npm install json-server@0.17.0
+     ```
+
+2. **Create `db.json`:**
+
+   - In your project directory, create a folder named `api`.
+   - Inside the `api` folder, create a file named `db.json` and include the following content:
+     ```json
+     {
+       "teams": [
+         { "id": 1, "name": "Atlanta Hawks", "division": "Southeast" },
+         { "id": 2, "name": "Boston Celtics", "division": "Atlantic" },
+         { "id": 3, "name": "Brooklyn Nets", "division": "Atlantic" },
+         { "id": 4, "name": "Charlotte Hornets", "division": "Southeast" },
+         { "id": 5, "name": "Chicago Bulls", "division": "Central" },
+         { "id": 6, "name": "Cleveland Cavaliers", "division": "Central" },
+         { "id": 7, "name": "Dallas Mavericks", "division": "Southwest" },
+         { "id": 8, "name": "Denver Nuggets", "division": "Northwest" },
+         { "id": 9, "name": "Detroit Pistons", "division": "Central" },
+         { "id": 10, "name": "Golden State Warriors", "division": "Pacific" },
+         { "id": 11, "name": "Houston Rockets", "division": "Southwest" },
+         { "id": 12, "name": "Indiana Pacers", "division": "Central" },
+         { "id": 13, "name": "LA Clippers", "division": "Pacific" },
+         { "id": 14, "name": "Los Angeles Lakers", "division": "Pacific" },
+         { "id": 15, "name": "Memphis Grizzlies", "division": "Southwest" },
+         { "id": 16, "name": "Miami Heat", "division": "Southeast" },
+         { "id": 17, "name": "Milwaukee Bucks", "division": "Central" },
+         { "id": 18, "name": "Minnesota Timberwolves", "division": "Northwest" },
+         { "id": 19, "name": "New Orleans Pelicans", "division": "Southwest" },
+         { "id": 20, "name": "New York Knicks", "division": "Atlantic" },
+         { "id": 21, "name": "Oklahoma City Thunder", "division": "Northwest" },
+         { "id": 22, "name": "Orlando Magic", "division": "Southeast" },
+         { "id": 23, "name": "Philadelphia 76ers", "division": "Atlantic" },
+         { "id": 24, "name": "Phoenix Suns", "division": "Pacific" },
+         { "id": 25, "name": "Portland Trail Blazers", "division": "Northwest" },
+         { "id": 26, "name": "Sacramento Kings", "division": "Pacific" },
+         { "id": 27, "name": "San Antonio Spurs", "division": "Southwest" },
+         { "id": 28, "name": "Toronto Raptors", "division": "Atlantic" },
+         { "id": 29, "name": "Utah Jazz", "division": "Northwest" },
+         { "id": 30, "name": "Washington Wizards", "division": "Southeast" }
+       ]
+     }
+     ```
+
+3. **Add a Script to Start `json-server`:**
+
+   - In your project’s `package.json`, add a new script to start the `json-server`. Add this to the `"scripts"` section:
+     ```json
+     "scripts": {
+       "api": "json-server --watch api/db.json --port 9000"
+     }
+     ```
+   - This script starts the `json-server` on port 9000 and watches the `db.json` file for changes.
+
+4. **Start the JSON Server:**
+
+   - Run the following command in your project directory to start the server:
+     ```bash
+     npm run api
+     ```
+
+5. **Verify the Setup:**
+
+   - Open your browser and navigate to `http://localhost:9000/teams` to see the list of NBA teams served by `json-server`. You should see a JSON response with all the teams.
+
+
+With this setup, you now have a `json-server` instance running that provides a REST API for NBA teams.
+
+### Exercise 13: Updating `teamAPI` to Use a REST API
+
+In this exercise, you will update the `teamAPI` to fetch data from a REST API served by `json-server` and handle errors gracefully using utility functions.
+
+#### Starter Code:
+You will start with the following code in `main.js`:
+
+> If the code looks familiar it is the solution to Exercise 7
+
+```js
+const { useState, useEffect } = React;
+
+const nbaTeams = [
+  { name: "Los Angeles Lakers", division: "Pacific" },
+  { name: "Chicago Bulls", division: "Central" },
+  { name: "Miami Heat", division: "Southeast" },
+  { name: "Dallas Mavericks", division: "Southwest" },
+];
+
+const teamAPI = {
+  list() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(nbaTeams);
+      }, 1000);
+    });
+  },
+};
+
+function App() {
+  const [busy, setBusy] = useState(false);
+  const [teams, setTeams] = useState([]);
+  async function loadTeams() {
+    setBusy(true);
+    let data = await teamAPI.list();
+    setBusy(false);
+    setTeams(data);
+  }
+
+  useEffect(function () {
+    loadTeams();
+  }, []);
+
+  return (
+    <div>
+      {busy && <p>Loading...</p>}
+      {teams?.map((team) => (
+        <div className="card" key={team.name}>
+          <strong>{team.name}</strong>
+          <div>{team.division}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+```
+
+Add a `fetchUtilities.js` file to the root project folder with the following code:
+
+```js
+export const BASE_URL = "http://localhost:9000";
+
+export function translateStatusToErrorMessage(status) {
+  switch (status) {
+    case 401:
+      return "Please sign in again.";
+    case 403:
+      return "You do not have permission to view the data requested.";
+    default:
+      return "There was an error saving or retrieving data.";
+  }
+}
+
+export async function checkStatus(response) {
+  if (response.ok) return response;
+
+  const httpError = {
+    status: response.status,
+    statusText: response.statusText,
+    url: response.url,
+    body: await response.text(),
+  };
+  console.log(`http error status: ${JSON.stringify(httpError, null, 1)}`);
+
+  let errorMessage = translateStatusToErrorMessage(httpError.status);
+  throw new Error(errorMessage);
+}
+
+export function parseJSON(response) {
+  return response.json();
+}
+
+export function delay(ms) {
+  return function (x) {
+    return new Promise((resolve) => setTimeout(() => resolve(x), ms));
+  };
+}
+```
+
+#### Steps:
+
+1. **Install Dependencies:**
+   - Ensure that you have `json-server` installed and running on port 9000. If not, refer to Exercise 12 for setup instructions.
+    > Note you will still need `npm start` running in a separate terminal to server the front-end React code
+
+2. **Update `teamAPI` to Use the REST API:**
+   - Modify the `teamAPI.list` function to fetch data from your `json-server` API.
+   - Use the `fetchUtilities.js` functions `checkStatus` and `parseJSON` to handle the HTTP response and errors.
+
+3. **Handle API Errors:**
+   - Update the `App` component to display user-friendly error messages if the API request fails. Use state to store and display any error messages.
+
+4. **Enhance the Component:**
+   - Ensure that the component displays loading status, fetches data from the REST API, and handles any errors appropriately.
+
+5. **Verify the Application:**
+   - Run your application and verify that the NBA teams are fetched from the REST API and displayed correctly. Check for proper error handling and user messages.
+
+<!-- #### Final Code Solution:
+
+```js
+import { BASE_URL, checkStatus, parseJSON } from './fetchUtilities.js';
+
+const { useState, useEffect } = React;
+
+const teamAPI = {
+  list() {
+    return fetch(`${BASE_URL}/teams`)
+      .then(checkStatus)
+      .then(parseJSON);
+  },
+};
+
+function App() {
+  const [busy, setBusy] = useState(false);
+  const [teams, setTeams] = useState([]);
+  const [error, setError] = useState(null);
+
+  async function loadTeams() {
+    setBusy(true);
+    setError(null);
+    try {
+      let data = await teamAPI.list();
+      setTeams(data);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  useEffect(function () {
+    loadTeams();
+  }, []);
+
+  return (
+    <div>
+      {busy && <p>Loading...</p>}
+      {error && <p className="alert alert-danger">{error}</p>}
+      {teams?.map((team) => (
+        <div className="card" key={team.id}>
+          <strong>{team.name}</strong>
+          <div>{team.division}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+``` -->
+
+
 
 ## Exercise 14: Router
 
