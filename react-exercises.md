@@ -10,8 +10,8 @@
   - [Exercise 7: Async Data Fetching](#exercise-7-async-data-fetching)
   - [Exercise 8: Forms](#exercise-8-forms)
   - [Exercise 9: Form Validation](#exercise-9-form-validation)
-  - [Exercise 10: Forms using React Hook Form](#exercise-10-forms-using-react-hook-form)
-  - [Exercise 11: Form Validation with React Hook Form](#exercise-11-form-validation-with-react-hook-form)
+    - [Exercise 11: Refactor Form with React Hook Form](#exercise-11-refactor-form-with-react-hook-form)
+    - [Steps:](#steps)
   - [Exercise 12: Setting Up a REST API](#exercise-12-setting-up-a-rest-api)
   - [Exercise 13: GET from REST API](#exercise-13-get-from-rest-api)
   - [Exercise 14: Router](#exercise-14-router)
@@ -618,6 +618,33 @@ In this exercise, you will create a contact form in React that includes validati
 
 ---
 
+#### `index.html`
+
+```html
+<!DOCTYPE html>
+<!-- index.html -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Demos</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script src="/node_modules/react/umd/react.development.js"></script>
+    <script src="/node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="/node_modules/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel" src="/main.js"></script>
+  </body>
+</html>
+```
+
 #### `main.js`
 
 ```js
@@ -727,27 +754,191 @@ function App() {
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 ```
 
-## Exercise 10: Forms using React Hook Form
+Here's the revised set of steps for the exercise, including the hint for using `useForm` directly and how to refactor the code:
 
-In this exercise, you will use React Hook Form to manage form state and validation. Bootstrap will be used for styling the form.
+---
 
-1. Starter with this code
+### Exercise 11: Refactor Form with React Hook Form
 
-   **`main.js`**
+**Objective:** Transition an existing form to use React Hook Form for managing form state and validation.
 
-   ```js
-   const { useForm } = window.ReactHookForm;
+**Starter Code:** Start with the provided code from the prior exercise.
+
+### Steps:
+
+1. **Install React Hook Form:**
+   Install React Hook Form using npm and include the UMD script in your `index.html`:
+
+   ```html
+   <script src="/node_modules/react-hook-form/dist/index.umd.js"></script>
+   ```
+
+   > It will need to be placed before `main.js`
+
+2. **Import `useForm`:**
+   Import `useForm` so that it can be called directly within the `ContactUsForm` component:
+
+   ```javascript
+   const { useForm } = ReactHookForm;
+   ```
+
+3. **Call `useForm`:**
+   Call `useForm` inside your `ContactUsForm` component to manage form state:
+
+   ```javascript
+   const {
+     register,
+     handleSubmit,
+     formState: { errors },
+   } = useForm();
+   ```
+
+4. **Refactor Form Fields:**  
+   Refactor each form field to use `register` from React Hook Form:
+
+   - **Before:**
+     ```javascript
+     <select
+       id="department"
+       className={`form-select ${errors.department ? "is-invalid" : ""}`}
+       name="department"
+       value={department}
+       onChange={(e) => setDepartment(e.target.value)}
+     >
+     ```
+   - **After:**
+     ```javascript
+     <select
+       id="department"
+       className={`form-select ${errors.department ? "is-invalid" : ""}`}
+       {...register("department", { required: "Department is required" })}
+     >
+     ```
+
+5. **Refactor Validation Errors:**  
+   Update the validation error messages to use React Hook Form’s `errors` object:
+
+   - **Before:**
+     ```javascript
+     {
+       errors.department && (
+         <div className="invalid-feedback">{errors.department}</div>
+       );
+     }
+     ```
+   - **After:**
+     ```javascript
+     {
+       errors.department && (
+         <div className="invalid-feedback">{errors.department.message}</div>
+       );
+     }
+     ```
+
+<!-- 6. **Solution:**  
+   Once finished, your code should look like the following:
+
+   ```html
+   <!DOCTYPE html>
+   <html lang="en">
+     <head>
+       <meta charset="UTF-8" />
+       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+       <title>React Demos</title>
+       <link
+         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+         rel="stylesheet"
+       />
+       <link rel="stylesheet" href="styles.css" />
+     </head>
+     <body>
+       <div id="root"></div>
+
+       <script src="/node_modules/react/umd/react.development.js"></script>
+       <script src="/node_modules/react-dom/umd/react-dom.development.js"></script>
+       <script src="/node_modules/react-hook-form/dist/index.umd.js"></script>
+       <script src="/node_modules/@babel/standalone/babel.min.js"></script>
+       <script type="text/babel" src="/main.js"></script>
+     </body>
+   </html>
+   ```
+
+   ```javascript
+   // main.js
+   const { useForm } = ReactHookForm;
 
    function ContactUsForm() {
-     const { register, handleSubmit, watch } = useForm();
+     const {
+       register,
+       handleSubmit,
+       formState: { errors },
+     } = useForm();
 
-     function send(data) {
-       console.log(data);
+     function send(formData) {
+       console.log("Form submitted:", formData);
      }
 
      return (
-       <form onSubmit={handleSubmit(send)} className="mt-4">
-         {/* Add form fields here */}
+       <form className="mt-4" onSubmit={handleSubmit(register)}>
+         <div className="mb-3">
+           <label htmlFor="department" className="form-label">
+             Department
+           </label>
+           <select
+             id="department"
+             className={`form-select ${errors.department ? "is-invalid" : ""}`}
+             {...register("department", { required: "Department is required" })}
+           >
+             <option value="">Select...</option>
+             <option value="hr">Human Resources</option>
+             <option value="pr">Public Relations</option>
+             <option value="support">Support</option>
+           </select>
+           {errors.department && (
+             <div className="invalid-feedback">{errors.department.message}</div>
+           )}
+         </div>
+
+         <div className="mb-3">
+           <label htmlFor="message" className="form-label">
+             Message
+           </label>
+           <textarea
+             id="message"
+             className={`form-control ${errors.message ? "is-invalid" : ""}`}
+             {...register("message", { required: "Message is required" })}
+             cols="30"
+             rows="5"
+           />
+           {errors.message && (
+             <div className="invalid-feedback">{errors.message.message}</div>
+           )}
+         </div>
+
+         <div className="mb-3 form-check">
+           <input
+             type="checkbox"
+             id="agreedToTerms"
+             className={`form-check-input ${
+               errors.agreedToTerms ? "is-invalid" : ""
+             }`}
+             {...register("agreedToTerms", {
+               required: "You must agree to the terms to continue",
+             })}
+           />
+           <label htmlFor="agreedToTerms" className="form-check-label">
+             I agree to the terms and conditions.
+           </label>
+           {errors.agreedToTerms && (
+             <div className="invalid-feedback">
+               {errors.agreedToTerms.message}
+             </div>
+           )}
+         </div>
+
+         <button type="submit" className="btn btn-primary">
+           Send
+         </button>
        </form>
      );
    }
@@ -761,232 +952,7 @@ In this exercise, you will use React Hook Form to manage form state and validati
    }
 
    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-   ```
-
-   **`index.html`**
-
-   ```html
-   <!DOCTYPE html>
-   <html lang="en">
-     <head>
-       <meta charset="UTF-8" />
-       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-       <title>React Hook Form Exercise</title>
-       <link
-         rel="stylesheet"
-         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-         crossorigin="anonymous"
-       />
-       <link rel="stylesheet" href="styles.css" />
-     </head>
-     <body>
-       <div id="root"></div>
-       <script src="/node_modules/react/dist/react.development.js"></script>
-       <script src="/node_modules/react-dom/dist/react-dom.development.js"></script>
-
-       <script type="text/babel" src="/main.js"></script>
-     </body>
-   </html>
-   ```
-
-1. **Install React Hook Form:**
-
-   - Run the following command in your project directory to install React Hook Form:
-     ```bash
-     npm install react-hook-form
-     ```
-
-1. **Update the `index.html`:**
-
-   - Add the React Hook Form script before the `main.js` script in your `index.html` file:
-     ```html
-     <script src="/node_modules/react-hook-form/dist/index.umd.js"></script>
-     <script type="text/babel" src="/main.js"></script>
-     ```
-
-1. **Add Bootstrap CSS:**
-
-   - Include the Bootstrap CSS link in your `index.html` file, ensuring it appears before your custom `styles.css` file:
-     ```html
-     <link
-       rel="stylesheet"
-       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-       crossorigin="anonymous"
-     />
-     <link rel="stylesheet" href="styles.css" />
-     ```
-
-1. **Set Up the Form Component:**
-
-   - Create a component named `ContactUsForm` using React Hook Form. Import the necessary functions from React Hook Form by declaring `const { useForm } = window.ReactHookForm;`.
-
-1. **Create the Form Layout:**
-
-   - Inside the `ContactUsForm` component:
-     - Call `useForm()` and destructure `register`, `handleSubmit`, and `watch`.
-     - Structure the form as follows:
-       - A `<select>` element for the department, using `{...register('department')}`.
-       - A `<textarea>` element for the message, using `{...register('message')}`.
-       - A `<input type="checkbox">` element for agreeing to terms and conditions, using `{...register('agreeToTerms')}`.
-       - A submit button labeled "Send."
-     - Wrap the form in Bootstrap classes for styling.
-
-1. **Handle Form Submission:**
-
-   - Implement a `send` function that receives form data and logs it to the console.
-   - Attach the `send` function to the form’s `onSubmit` event by passing it to `handleSubmit`.
-
-1. **Wrap the Form in an App Component:**
-
-   - Create an `App` component that renders the `ContactUsForm` component inside a `div.container` for consistent Bootstrap styling.
-   - Update the root rendering to include the `App` component.
-
-1. **Testing the Form:**
-
-   - Run the application and verify that the form works as expected. Check the console for the submitted form data and observe the real-time form state displayed below the form.
-
----
-
-## Exercise 11: Form Validation with React Hook Form
-
-In this exercise, you'll set up form validation using React Hook Form and display validation errors with Bootstrap 5 classes. Make sure to test the form to ensure it behaves correctly and handles validation errors as expected.
-
-In this exercise, you'll use React Hook Form to handle form validation and display errors using Bootstrap 5 classes.
-
-1. **Add Bootstrap and React Hook Form Libraries:**
-
-   - Install React Hook Form via npm:
-     ```bash
-     npm install react-hook-form
-     ```
-   - Add the React Hook Form library script to the `index.html` file before `main.js`:
-     ```html
-     <script src="/node_modules/react-hook-form/dist/index.umd.js"></script>
-     ```
-
-2. **Set Up the HTML File:**
-
-   - Add the Bootstrap CSS CDN link to the `index.html` file. Place it before your custom `styles.css`:
-     ```html
-     <link
-       rel="stylesheet"
-       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-       crossorigin="anonymous"
-     />
-     <link rel="stylesheet" href="styles.css" />
-     ```
-   - Ensure that the Bootstrap JavaScript file is not included, as it is not required for this exercise.
-
-3. **Create the `ContactUsForm` Component:**
-
-   - Use React Hook Form to manage form state and validation.
-   - Replace error display with Bootstrap classes for form validation.
-   - Wrap your form component in an `App` component with a Bootstrap `container`.
-
-4. **Update Your Form Component:**
-
-   - Replace the custom error display with Bootstrap classes for form validation.
-
-5. **Verify Form Validation:**
-   - Run the application and ensure that:
-     - The form displays validation errors when fields are left empty or unchecked.
-     - The validation error messages are styled with Bootstrap classes and appear below the respective form fields.
-     - The form submits correctly when all required fields are filled out and the checkbox is checked.
-
----
-
-<!-- #### `main.js`
-
-```js
-const { useForm } = window.ReactHookForm;
-
-function ContactUsForm() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  function send(data) {
-    console.log(data);
-  }
-
-  return (
-    <form className="mt-4" onSubmit={handleSubmit(send)}>
-      <div className="mb-3">
-        <label htmlFor="department" className="form-label">
-          Department
-        </label>
-        <select
-          id="department"
-          {...register("department", { required: "Department is required" })}
-          className={`form-select ${errors.department ? "is-invalid" : ""}`}
-        >
-          <option value="">Select...</option>
-          <option value="hr">Human Resources</option>
-          <option value="pr">Public Relations</option>
-          <option value="support">Support</option>
-        </select>
-        {errors.department && (
-          <div className="invalid-feedback">{errors.department?.message}</div>
-        )}
-      </div>
-
-      <div className="mb-3">
-        <label htmlFor="message" className="form-label">
-          Message
-        </label>
-        <textarea
-          id="message"
-          {...register("message", { required: "A message is required" })}
-          className={`form-control ${errors.message ? "is-invalid" : ""}`}
-          cols="30"
-          rows="5"
-        />
-        {errors.message && (
-          <div className="invalid-feedback">{errors.message?.message}</div>
-        )}
-      </div>
-
-      <div className="mb-3 form-check">
-        <input
-          type="checkbox"
-          id="agreeToTerms"
-          {...register("agreeToTerms", {
-            required: "You must accept the terms to send",
-          })}
-          className={`form-check-input ${
-            errors.agreeToTerms ? "is-invalid" : ""
-          }`}
-        />
-        <label htmlFor="agreeToTerms" className="form-check-label">
-          I agree to the terms and conditions.
-        </label>
-        {errors.agreeToTerms && (
-          <div className="invalid-feedback">{errors.agreeToTerms?.message}</div>
-        )}
-      </div>
-
-      <button type="submit" className="btn btn-primary">
-        Send
-      </button>
-    </form>
-  );
-}
-
-function App() {
-  return (
-    <div className="container">
-      <ContactUsForm />
-    </div>
-  );
-}
-
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-``` -->
+   ``` -->
 
 ## Exercise 12: Setting Up a REST API
 
