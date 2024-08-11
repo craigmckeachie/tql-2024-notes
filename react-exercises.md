@@ -15,6 +15,8 @@
   - [Exercise 12: Setting Up a REST API](#exercise-12-setting-up-a-rest-api)
   - [Exercise 13: GET from REST API](#exercise-13-get-from-rest-api)
   - [Exercise 14: Router](#exercise-14-router)
+    - [Steps:](#steps-1)
+    - [Tips:](#tips)
 
 ## Exercise 1: First Component
 
@@ -1306,12 +1308,172 @@ In this exercise, you will update the `teamAPI` to fetch data from a REST API se
     }
     ``` -->
 
+Here's the revised Exercise 14 without starter code and with an added final verification step:
+
+---
+
 ## Exercise 14: Router
 
+In this exercise, you'll set up routing in your React application using React Router. Follow the steps below to complete the exercise.
+
+### Steps:
+
+1. **Install React Router**
+
+   Ensure you have React Router installed. Run the following command to add it to your project:
+
+   ```bash
+   npm install react-router-dom
+   ```
+
+2. **Update `index.html`**
+
+   Add the React Router script to your `index.html` file above the `main.js` script:
+
+   ```html
+   <script src="/node_modules/react-router-dom/umd/react-router-dom.development.js"></script>
+   ```
+
+3. **Create Components**
+
+   Define three components for your pages: `HomePage`, `MoviesPage`, and `ActorsPage`. Each should return a simple `h2` element with the page name.
+
+4. **Set Up Router**
+
+   In your `App` component:
+
+   - Import `BrowserRouter`, `Routes`, and `Route` from `react-router-dom`.
+   - Wrap your component tree with `BrowserRouter`.
+   - Use `Routes` and `Route` to define routes for `/`, `/movies`, and `/actors`.
+
+5. **Add Navigation**
+
+   Create a navigation bar inside your `App` component:
+
+   - Use `NavLink` from `react-router-dom` to create links for "Home", "Movies", and "Actors".
+   - Style the navigation bar using Bootstrap classes.
+
+6. **Render the Application**
+
+   Render the `App` component inside the `index.html` file.
+
+7. **Verify the Application**
+
+   Open your browser and navigate to the following URLs to verify that routing works as expected:
+
+   - `/` should display the Home page.
+   - `/movies` should display the Movies page.
+   - `/actors` should display the Actors page.
+
+   Ensure that the navigation links correctly switch between these pages and that the current page is highlighted in the navigation.
+
+### Tips:
+
+- Ensure `NavLink` is used to navigate between pages and applies the correct styling.
+- Use the `element` prop in `Route` to render components for each route.
+
+---
+
+This guide provides step-by-step instructions, allowing students to build the routing setup and verify their implementation.
+
+<!-- #### Solution Code
+
+
+Here’s the final solution code for Exercise 14:
+
+#### `main.js`
+
+```js
+const {
+  BrowserRouter: Router,
+  Route,
+  Routes,
+  Link,
+  NavLink,
+  Navigate,
+  useParams,
+  useLocation,
+  useNavigation,
+} = window.ReactRouterDOM;
+
+function HomePage() {
+  return <h2>Home</h2>;
+}
+
+function MoviesPage() {
+  return <h2>Movies</h2>;
+}
+
+function ActorsPage() {
+  return <h2>Actors</h2>;
+}
+
+function App() {
+  return (
+    <Router>
+      <div className="container">
+        <nav className="my-4 mb-5">
+          <ul className="nav nav-pills">
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/">
+                Home
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/movies">
+                Movies
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/actors">
+                Actors
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="movies" element={<MoviesPage />} />
+            <Route path="actors" element={<ActorsPage />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 ```
 
-```
+#### `index.html`
 
-```
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Demos</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="root"></div>
 
-```
+    <script src="/node_modules/react/umd/react.development.js"></script>
+    <script src="/node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="/node_modules/react-hook-form/dist/index.umd.js"></script>
+    <script src="/node_modules/history/umd/history.development.js"></script>
+    <script src="/node_modules/react-router/umd/react-router.development.js"></script>
+    <script src="/node_modules/react-router-dom/umd/react-router-dom.development.js"></script>
+
+    <script src="/node_modules/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel" src="/main.js"></script>
+  </body>
+</html>
+``` -->
