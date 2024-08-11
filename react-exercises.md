@@ -18,6 +18,8 @@
     - [Steps:](#steps-1)
     - [Tips:](#tips)
   - [Exercise 15: Route Parameters](#exercise-15-route-parameters)
+  - [Exercise 16: More Forms Practice](#exercise-16-more-forms-practice)
+  - [Exercise 17](#exercise-17)
 
 ## Exercise 1: First Component
 
@@ -1580,5 +1582,44 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 
 ## Exercise 15: Route Parameters
 
-1. Integrate the code from exercise 13 for the `TeamList` into `main.js` (this would include the movieAPI and the helper functions for calling it). Render the `MovieList` component inside of the `TeasmsPage` component.
-2. Add an **Add Movie** button
+1. Integrate the code from exercise 13 for the `TeamList` into `main.js` (this would include the movieAPI and the helper functions for calling it). Render the `TeamList` component inside of the `TeamsPage` component.
+2. Add an **Add Team** link to the `TeamsPage` at the top next the **Teams** heading
+   - use the React Router `Link` component and not a regular `a` tag
+   - use the appropriate bootstrap classes to make the link look like a button
+   - have the button go to a new route `teams/create` which we will create later
+3. Create an `CreateTeamPage` component
+   - it should just have a heading which contains **Add Team**
+4. Add a `Route` to send `teams/create` to the `CreateTeamPage` component
+5. Test to verify that the `Link` works correctly and takes the user to the new page component
+6. Add an **Edit Team** link to each card in the `TeamsList`
+   - use the React Router `Link` component and not a regular `a` tag
+   - this should look like a link and not a Bootstrap button so no need to add any CSS classes
+   - have the link go to a new route passing the team id of the current team, for example: `teams/edit/5`
+7. Create an `EditTeamPage` component
+   - it should just have a heading which contains **Edit Team**
+8. Add a `Route` to send the url `teams/edit/:id` to the `EditTeamPage` component
+9. Test to verify that the `Link` works correctly and takes the user to the edit page component
+
+## Exercise 16: More Forms Practice
+
+1. Create a `TeamForm` component
+   - it should return a `form` tag and inside the form should be one label for **Team Name** and an input
+2. Render the `TeamForm` inside both the `CreateTeamPage` and `EditTeamPage` components
+3. Verify the form displays on each page
+4. Add all the other needed form fields for a team based on the properties of the `team` object
+5. Use React Hook Form to
+   - Register each form field
+   - Add a couple validation rules to the form as you see appropriate
+   - Handle the submission of the form and log out the data
+6. Verify the form data is logged and the validation displays error messages at the appropriate times
+
+## Exercise 17
+
+1. Add additional functions to the `teamAPI` object to insert and update the team data
+2. Use the add(post) function in the `TeamForm`in the form submit event handler function to take the data from React Hook form and save it to the backend API.
+3. Test the application to verify team insert works.
+4. Use the update(put) function in the `TeamForm`in the form submit event handler function to take the data from React Hook form and save it to the backend API.
+   - Tip: You can distinguish an insert from an update by looking to see if the team object has an id
+     - if no `id` then insert else update
+5. Test the application to verify team update works.
+6. Redirect to the `TeamsPage` after a successful insert or update
