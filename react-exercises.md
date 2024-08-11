@@ -762,7 +762,7 @@ Here's the revised set of steps for the exercise, including the hint for using `
 
 **Objective:** Transition an existing form to use React Hook Form for managing form state and validation.
 
-**Starter Code:** Start with the provided code from the prior exercise.
+**Starter Code:** Start with the solution code from the prior exercise.
 
 ### Steps:
 
@@ -835,7 +835,7 @@ Here's the revised set of steps for the exercise, including the hint for using `
      }
      ```
 
-<!-- 6. **Solution:**  
+<!-- 6. **Solution:**
    Once finished, your code should look like the following:
 
    ```html
