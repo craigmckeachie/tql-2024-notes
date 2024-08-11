@@ -1,9 +1,30 @@
+# React Exercises
+
+- [React Exercises](#react-exercises)
+  - [Exercise 1: First Component](#exercise-1-first-component)
+  - [Exercise 2: Props](#exercise-2-props)
+  - [Exercise 3: Event Handling](#exercise-3-event-handling)
+  - [Exercise 4: State](#exercise-4-state)
+  - [Exercise 5: Conditional Rendering](#exercise-5-conditional-rendering)
+  - [Exercise 6: Child to Parent Communication](#exercise-6-child-to-parent-communication)
+  - [Exercise 7: Async Data Fetching](#exercise-7-async-data-fetching)
+  - [Exercise 8: Forms](#exercise-8-forms)
+  - [Exercise 9: Form Validation](#exercise-9-form-validation)
+  - [Exercise 10: Forms using React Hook Form](#exercise-10-forms-using-react-hook-form)
+  - [Exercise 11: Form Validation with React Hook Form](#exercise-11-form-validation-with-react-hook-form)
+  - [Exercise 12: Setting Up a REST API](#exercise-12-setting-up-a-rest-api)
+  - [Exercise 13: GET from REST API](#exercise-13-get-from-rest-api)
+  - [Exercise 14: Router](#exercise-14-router)
+
 ## Exercise 1: First Component
 
 1. In `ReactDemos` folder
 1. Write a `Greeter` component in React that returns an `h2` with "Hello" inside of the element.
-1. Call it using this code ReactDOM.createRoot(document.getElementById("root")).render(<Greeter />);
-   1.Run `npm start` to see the result on the index.html page.
+1. Render the component using this code:
+   ```js
+   ReactDOM.createRoot(document.getElementById("root")).render(<Greeter />);
+   ```
+1. Run `npm start` to see the result on the index.html page.
 
 ## Exercise 2: Props
 
@@ -93,7 +114,7 @@
    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
    ```
 
-### Exercise 4: State
+## Exercise 4: State
 
 1. Create a component `App` and render it
 1. Inside the component, put a `message` variable in state and initialize to an empty string "".
@@ -154,41 +175,41 @@
 
    - Reload and verify the user's first and last name is shown
 
-#### `main.js`
+   #### `main.js`
 
-```js
-const { useState } = React;
+   ```js
+   const { useState } = React;
 
-function App() {
-  const [user, setUser] = useState(undefined);
-  // const [user, setUser] = useState({
-  //   first: "James",
-  //   last: "Roday",
-  // });
+   function App() {
+     const [user, setUser] = useState(undefined);
+     // const [user, setUser] = useState({
+     //   first: "James",
+     //   last: "Roday",
+     // });
 
-  return (
-    <>
-      <AccountHeader user={user} />
-    </>
-  );
-}
+     return (
+       <>
+         <AccountHeader user={user} />
+       </>
+     );
+   }
 
-function AccountHeader(props) {
-  return (
-    <>
-      {props.user ? (
-        <span>
-          Welcome, {props.user.first} {props.user.last}
-        </span>
-      ) : (
-        <a href="#">Sign In</a>
-      )}
-    </>
-  );
-}
+   function AccountHeader(props) {
+     return (
+       <>
+         {props.user ? (
+           <span>
+             Welcome, {props.user.first} {props.user.last}
+           </span>
+         ) : (
+           <a href="#">Sign In</a>
+         )}
+       </>
+     );
+   }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-```
+   ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+   ```
 
 <!-- ## Exercise 6B: More Conditional Rendering
 
@@ -248,62 +269,60 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
    - you need to pass the prop fruit for a given `FruitListItem` to the onRemove function so you will need to wrap `onRemove` in an arrow function to delay the calling of the function until the button is clicked
 1. Test the app and verify the appropriate `fruit` is removed when the **delete** button is clicked
 
----
+   #### `main.js`
 
-### `main.js`
+   ```js
+   const { useState } = React;
 
-```js
-const { useState } = React;
+   function FruitListItem(props) {
+     return (
+       <li>
+         {props.fruit.name} | <button onClick={props.onRemove}>Delete</button>
+       </li>
+     );
+   }
 
-function FruitListItem(props) {
-  return (
-    <li>
-      {props.fruit.name} | <button onClick={props.onRemove}>Delete</button>
-    </li>
-  );
-}
+   function FruitList() {
+     //code
 
-function FruitList() {
-  //code
+     //data
+     const [fruits, setFruits] = useState([
+       { id: 1, name: "apple" },
+       { id: 2, name: "orange" },
+       { id: 3, name: "blueberry" },
+       { id: 4, name: "banana" },
+       { id: 5, name: "kiwi" },
+     ]);
 
-  //data
-  const [fruits, setFruits] = useState([
-    { id: 1, name: "apple" },
-    { id: 2, name: "orange" },
-    { id: 3, name: "blueberry" },
-    { id: 4, name: "banana" },
-    { id: 5, name: "kiwi" },
-  ]);
+     //functions/event handlers
 
-  //functions/event handlers
+     function removeFruit(fruit) {
+       let updatedFruits = fruits.filter((f) => f.id !== fruit.id);
+       setFruits(updatedFruits);
+     }
 
-  function removeFruit(fruit) {
-    let updatedFruits = fruits.filter((f) => f.id !== fruit.id);
-    setFruits(updatedFruits);
-  }
+     //html
+     return (
+       <ul>
+         {fruits.map((fruit) => (
+           <FruitListItem
+             key={fruit.id}
+             fruit={fruit}
+             onRemove={() => removeFruit(fruit)}
+           />
+         ))}
+       </ul>
+     );
+   }
 
-  //html
-  return (
-    <ul>
-      {fruits.map((fruit) => (
-        <FruitListItem
-          key={fruit.id}
-          fruit={fruit}
-          onRemove={() => removeFruit(fruit)}
-        />
-      ))}
-    </ul>
-  );
-}
+   function App() {
+     return <FruitList />;
+   }
 
-function App() {
-  return <FruitList />;
-}
+   ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+   ```
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-```
-
-### Exercise 7: Displaying Teams with Simulated API Call
+## Exercise 7: Async Data Fetching
 
 This exercise demonstrates how to handle asynchronous data fetching and display the results.
 
@@ -361,82 +380,82 @@ This exercise demonstrates how to handle asynchronous data fetching and display 
 
 4. **Add Styles:**
 
-   - Create a `styles.css` file in your project directory.
-   - Define the `.card` class in `styles.css` with the following styles:
+- Create a `styles.css` file in your project directory.
+- Define the `.card` class in `styles.css` with the following styles:
 
-     ```css
-     .list {
-       display: flex;
-       gap: 2rem;
-       flex-wrap: wrap;
-     }
-
-     .card {
-       border: 1px solid lightgray;
-       padding: 2rem;
-       width: 18rem;
-     }
-     ```
-
-   - Ensure that `styles.css` is linked in your `index.html` file:
-
-     ```html
-     <link rel="stylesheet" href="styles.css" />
-     ```
-
-#### `main.js`
-
-```js
-const { useState, useEffect } = React;
-
-const nbaTeams = [
-  { name: "Los Angeles Lakers", division: "Pacific" },
-  { name: "Chicago Bulls", division: "Central" },
-  { name: "Miami Heat", division: "Southeast" },
-  { name: "Dallas Mavericks", division: "Southwest" },
-];
-
-const teamAPI = {
-  list() {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(nbaTeams);
-      }, 1000);
-    });
-  },
-};
-
-function App() {
-  const [busy, setBusy] = useState(false);
-  const [teams, setTeams] = useState([]);
-  async function loadTeams() {
-    setBusy(true);
-    let data = await teamAPI.list();
-    setBusy(false);
-    setTeams(data);
+  ```css
+  .list {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
   }
 
-  useEffect(function () {
-    loadTeams();
-  }, []);
+  .card {
+    border: 1px solid lightgray;
+    padding: 2rem;
+    width: 18rem;
+  }
+  ```
 
-  return (
-    <div>
-      {busy && <p>Loading...</p>}
-      {teams?.map((team) => (
-        <div className="card" key={team.name}>
-          <strong>{team.name}</strong>
-          <div>{team.division}</div>
-        </div>
-      ))}
-    </div>
-  );
-}
+- Ensure that `styles.css` is linked in your `index.html` file:
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-```
+  ```html
+  <link rel="stylesheet" href="styles.css" />
+  ```
 
-### Exercise 8: Building a Contact Us Form
+  #### `main.js`
+
+  ```js
+  const { useState, useEffect } = React;
+
+  const nbaTeams = [
+    { name: "Los Angeles Lakers", division: "Pacific" },
+    { name: "Chicago Bulls", division: "Central" },
+    { name: "Miami Heat", division: "Southeast" },
+    { name: "Dallas Mavericks", division: "Southwest" },
+  ];
+
+  const teamAPI = {
+    list() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(nbaTeams);
+        }, 1000);
+      });
+    },
+  };
+
+  function App() {
+    const [busy, setBusy] = useState(false);
+    const [teams, setTeams] = useState([]);
+    async function loadTeams() {
+      setBusy(true);
+      let data = await teamAPI.list();
+      setBusy(false);
+      setTeams(data);
+    }
+
+    useEffect(function () {
+      loadTeams();
+    }, []);
+
+    return (
+      <div>
+        {busy && <p>Loading...</p>}
+        {teams?.map((team) => (
+          <div className="card" key={team.name}>
+            <strong>{team.name}</strong>
+            <div>{team.division}</div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  ```
+
+## Exercise 8: Forms
 
 In this exercise, you'll build a Contact Us form with state management for multiple form fields and handle form submission.
 
@@ -470,76 +489,77 @@ In this exercise, you'll build a Contact Us form with state management for multi
    - Add a pre tag and call `JSON.stringify()` passing an object with the various variables you are tracking in state.
 
 5. **Testing the Form:**
+
    - Run the application and verify that the form behaves as expected:
      - When you select a department, enter a message, and check the "I agree to the terms and conditions" checkbox, the form state should update accordingly.
      - When you click "Send," the form data should be logged to the console as a JSON string.
 
----
+   #### `main.js`
 
-#### `main.js`
+   ```js
+   function ContactUsForm() {
+     const [department, setDepartment] = React.useState("");
+     const [message, setMessage] = React.useState("");
+     const [agreedToTerms, setAgreedToTerms] = React.useState(false);
 
-```js
-function ContactUsForm() {
-  const [department, setDepartment] = React.useState("");
-  const [message, setMessage] = React.useState("");
-  const [agreedToTerms, setAgreedToTerms] = React.useState(false);
+     function handleSubmit(event) {
+       event.preventDefault();
+       console.log("submitting", stateToString());
+     }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    console.log("submitting", stateToString());
-  }
+     function stateToString() {
+       return JSON.stringify(
+         {
+           department,
+           message,
+           agreedToTerms,
+         },
+         null,
+         " "
+       );
+     }
 
-  function stateToString() {
-    return JSON.stringify(
-      {
-        department,
-        message,
-        agreedToTerms,
-      },
-      null,
-      " "
-    );
-  }
+     return (
+       <form onSubmit={handleSubmit}>
+         <select
+           name="department"
+           value={department}
+           onChange={(e) => setDepartment(e.target.value)}
+         >
+           <option value="">Select...</option>
+           <option value="hr">Human Resources</option>
+           <option value="pr">Public Relations</option>
+           <option value="support">Support</option>
+         </select>
+         <br />
+         <br />
+         <textarea
+           name="message"
+           value={message}
+           onChange={(e) => setMessage(e.target.value)}
+           cols="30"
+           rows="10"
+         />
+         <br />
+         <input
+           type="checkbox"
+           name="agreedToTerms"
+           checked={agreedToTerms}
+           onChange={(e) => setAgreedToTerms(e.target.checked)}
+         />
+         I agree to the terms and conditions.
+         <br />
+         <button>Send</button>
+       </form>
+     );
+   }
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <select
-        name="department"
-        value={department}
-        onChange={(e) => setDepartment(e.target.value)}
-      >
-        <option value="">Select...</option>
-        <option value="hr">Human Resources</option>
-        <option value="pr">Public Relations</option>
-        <option value="support">Support</option>
-      </select>
-      <br />
-      <br />
-      <textarea
-        name="message"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        cols="30"
-        rows="10"
-      />
-      <br />
-      <input
-        type="checkbox"
-        name="agreedToTerms"
-        checked={agreedToTerms}
-        onChange={(e) => setAgreedToTerms(e.target.checked)}
-      />
-      I agree to the terms and conditions.
-      <br />
-      <button>Send</button>
-    </form>
-  );
-}
+   ReactDOM.createRoot(document.getElementById("root")).render(
+     <ContactUsForm />
+   );
+   ```
 
-ReactDOM.createRoot(document.getElementById("root")).render(<ContactUsForm />);
-```
-
-### Exercise 9: Building a Validated Contact Us Form with Bootstrap
+## Exercise 9: Form Validation
 
 In this exercise, you will create a contact form in React that includes validation and utilizes Bootstrap 5 for styling.
 
@@ -707,9 +727,68 @@ function App() {
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 ```
 
-### Exercise 10: Integrating React Hook Form with Bootstrap for Advanced Form Handling
+## Exercise 10: Forms using React Hook Form
 
 In this exercise, you will use React Hook Form to manage form state and validation. Bootstrap will be used for styling the form.
+
+1. Starter with this code
+
+   **`main.js`**
+
+   ```js
+   const { useForm } = window.ReactHookForm;
+
+   function ContactUsForm() {
+     const { register, handleSubmit, watch } = useForm();
+
+     function send(data) {
+       console.log(data);
+     }
+
+     return (
+       <form onSubmit={handleSubmit(send)} className="mt-4">
+         {/* Add form fields here */}
+       </form>
+     );
+   }
+
+   function App() {
+     return (
+       <div className="container">
+         <ContactUsForm />
+       </div>
+     );
+   }
+
+   ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+   ```
+
+   **`index.html`**
+
+   ```html
+   <!DOCTYPE html>
+   <html lang="en">
+     <head>
+       <meta charset="UTF-8" />
+       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+       <title>React Hook Form Exercise</title>
+       <link
+         rel="stylesheet"
+         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+         crossorigin="anonymous"
+       />
+       <link rel="stylesheet" href="styles.css" />
+     </head>
+     <body>
+       <div id="root"></div>
+       <script src="/node_modules/react/dist/react.development.js"></script>
+       <script src="/node_modules/react-dom/dist/react-dom.development.js"></script>
+
+       <script type="text/babel" src="/main.js"></script>
+     </body>
+   </html>
+   ```
 
 1. **Install React Hook Form:**
 
@@ -718,7 +797,7 @@ In this exercise, you will use React Hook Form to manage form state and validati
      npm install react-hook-form
      ```
 
-2. **Update the `index.html`:**
+1. **Update the `index.html`:**
 
    - Add the React Hook Form script before the `main.js` script in your `index.html` file:
      ```html
@@ -726,7 +805,7 @@ In this exercise, you will use React Hook Form to manage form state and validati
      <script type="text/babel" src="/main.js"></script>
      ```
 
-3. **Add Bootstrap CSS:**
+1. **Add Bootstrap CSS:**
 
    - Include the Bootstrap CSS link in your `index.html` file, ensuring it appears before your custom `styles.css` file:
      ```html
@@ -739,11 +818,11 @@ In this exercise, you will use React Hook Form to manage form state and validati
      <link rel="stylesheet" href="styles.css" />
      ```
 
-4. **Set Up the Form Component:**
+1. **Set Up the Form Component:**
 
    - Create a component named `ContactUsForm` using React Hook Form. Import the necessary functions from React Hook Form by declaring `const { useForm } = window.ReactHookForm;`.
 
-5. **Create the Form Layout:**
+1. **Create the Form Layout:**
 
    - Inside the `ContactUsForm` component:
      - Call `useForm()` and destructure `register`, `handleSubmit`, and `watch`.
@@ -754,86 +833,23 @@ In this exercise, you will use React Hook Form to manage form state and validati
        - A submit button labeled "Send."
      - Wrap the form in Bootstrap classes for styling.
 
-6. **Handle Form Submission:**
+1. **Handle Form Submission:**
 
    - Implement a `send` function that receives form data and logs it to the console.
    - Attach the `send` function to the form’s `onSubmit` event by passing it to `handleSubmit`.
 
-7. **Monitor Form State:**
-
-   - Display the current form state using `watch()` in a `<pre>` element to observe the real-time form data. Use `JSON.stringify()` to format the output.
-
-8. **Wrap the Form in an App Component:**
+1. **Wrap the Form in an App Component:**
 
    - Create an `App` component that renders the `ContactUsForm` component inside a `div.container` for consistent Bootstrap styling.
    - Update the root rendering to include the `App` component.
 
-9. **Testing the Form:**
+1. **Testing the Form:**
 
    - Run the application and verify that the form works as expected. Check the console for the submitted form data and observe the real-time form state displayed below the form.
 
 ---
 
-#### Starter Code
-
-**`main.js`**
-
-```js
-const { useForm } = window.ReactHookForm;
-
-function ContactUsForm() {
-  const { register, handleSubmit, watch } = useForm();
-
-  function send(data) {
-    console.log(data);
-  }
-
-  return (
-    <form onSubmit={handleSubmit(send)} className="mt-4">
-      {/* Add form fields here */}
-    </form>
-  );
-}
-
-function App() {
-  return (
-    <div className="container">
-      <ContactUsForm />
-    </div>
-  );
-}
-
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-```
-
-**`index.html`**
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>React Hook Form Exercise</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script src="/node_modules/react/dist/react.development.js"></script>
-    <script src="/node_modules/react-dom/dist/react-dom.development.js"></script>
-    <script src="/node_modules/react-hook-form/dist/index.umd.js"></script>
-    <script type="text/babel" src="/main.js"></script>
-  </body>
-</html>
-```
-
-### Exercise 11: Using React Hook Form with Bootstrap Validation
+## Exercise 11: Form Validation with React Hook Form
 
 In this exercise, you'll set up form validation using React Hook Form and display validation errors with Bootstrap 5 classes. Make sure to test the form to ensure it behaves correctly and handles validation errors as expected.
 
@@ -972,7 +988,7 @@ function App() {
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 ``` -->
 
-### Exercise 12: Setting Up a REST API with json-server
+## Exercise 12: Setting Up a REST API
 
 In this exercise, you'll set up a REST API using `json-server` to simulate fetching data for an NBA teams application.
 
@@ -1055,129 +1071,127 @@ In this exercise, you'll set up a REST API using `json-server` to simulate fetch
 
 With this setup, you now have a `json-server` instance running that provides a REST API for NBA teams.
 
-### Exercise 13: Updating `teamAPI` to Use a REST API
+## Exercise 13: GET from REST API
 
 In this exercise, you will update the `teamAPI` to fetch data from a REST API served by `json-server` and handle errors gracefully using utility functions.
 
-#### Starter Code:
+1. Starter Code:
 
-You will start with the following code in `main.js`:
+   You will start with the following code in `main.js`:
 
-> If the code looks familiar it is the solution to Exercise 7
+   > This is the solution code from exercise 7
 
-```js
-const { useState, useEffect } = React;
+   ```js
+   const { useState, useEffect } = React;
 
-const nbaTeams = [
-  { name: "Los Angeles Lakers", division: "Pacific" },
-  { name: "Chicago Bulls", division: "Central" },
-  { name: "Miami Heat", division: "Southeast" },
-  { name: "Dallas Mavericks", division: "Southwest" },
-];
+   const nbaTeams = [
+     { name: "Los Angeles Lakers", division: "Pacific" },
+     { name: "Chicago Bulls", division: "Central" },
+     { name: "Miami Heat", division: "Southeast" },
+     { name: "Dallas Mavericks", division: "Southwest" },
+   ];
 
-const teamAPI = {
-  list() {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(nbaTeams);
-      }, 1000);
-    });
-  },
-};
+   const teamAPI = {
+     list() {
+       return new Promise((resolve) => {
+         setTimeout(() => {
+           resolve(nbaTeams);
+         }, 1000);
+       });
+     },
+   };
 
-function App() {
-  const [busy, setBusy] = useState(false);
-  const [teams, setTeams] = useState([]);
-  async function loadTeams() {
-    setBusy(true);
-    let data = await teamAPI.list();
-    setBusy(false);
-    setTeams(data);
-  }
+   function App() {
+     const [busy, setBusy] = useState(false);
+     const [teams, setTeams] = useState([]);
+     async function loadTeams() {
+       setBusy(true);
+       let data = await teamAPI.list();
+       setBusy(false);
+       setTeams(data);
+     }
 
-  useEffect(function () {
-    loadTeams();
-  }, []);
+     useEffect(function () {
+       loadTeams();
+     }, []);
 
-  return (
-    <div>
-      {busy && <p>Loading...</p>}
-      {teams?.map((team) => (
-        <div className="card" key={team.name}>
-          <strong>{team.name}</strong>
-          <div>{team.division}</div>
-        </div>
-      ))}
-    </div>
-  );
-}
+     return (
+       <div>
+         {busy && <p>Loading...</p>}
+         {teams?.map((team) => (
+           <div className="card" key={team.name}>
+             <strong>{team.name}</strong>
+             <div>{team.division}</div>
+           </div>
+         ))}
+       </div>
+     );
+   }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-```
+   ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+   ```
 
-Add a `fetchUtilities.js` file to the root project folder with the following code:
+   Add a `fetchUtilities.js` file to the root project folder with the following code:
 
-```js
-export const BASE_URL = "http://localhost:9000";
+   ```js
+   export const BASE_URL = "http://localhost:9000";
 
-export function translateStatusToErrorMessage(status) {
-  switch (status) {
-    case 401:
-      return "Please sign in again.";
-    case 403:
-      return "You do not have permission to view the data requested.";
-    default:
-      return "There was an error saving or retrieving data.";
-  }
-}
+   export function translateStatusToErrorMessage(status) {
+     switch (status) {
+       case 401:
+         return "Please sign in again.";
+       case 403:
+         return "You do not have permission to view the data requested.";
+       default:
+         return "There was an error saving or retrieving data.";
+     }
+   }
 
-export async function checkStatus(response) {
-  if (response.ok) return response;
+   export async function checkStatus(response) {
+     if (response.ok) return response;
 
-  const httpError = {
-    status: response.status,
-    statusText: response.statusText,
-    url: response.url,
-    body: await response.text(),
-  };
-  console.log(`http error status: ${JSON.stringify(httpError, null, 1)}`);
+     const httpError = {
+       status: response.status,
+       statusText: response.statusText,
+       url: response.url,
+       body: await response.text(),
+     };
+     console.log(`http error status: ${JSON.stringify(httpError, null, 1)}`);
 
-  let errorMessage = translateStatusToErrorMessage(httpError.status);
-  throw new Error(errorMessage);
-}
+     let errorMessage = translateStatusToErrorMessage(httpError.status);
+     throw new Error(errorMessage);
+   }
 
-export function parseJSON(response) {
-  return response.json();
-}
+   export function parseJSON(response) {
+     return response.json();
+   }
 
-export function delay(ms) {
-  return function (x) {
-    return new Promise((resolve) => setTimeout(() => resolve(x), ms));
-  };
-}
-```
-
-#### Steps:
+   export function delay(ms) {
+     return function (x) {
+       return new Promise((resolve) => setTimeout(() => resolve(x), ms));
+     };
+   }
+   ```
 
 1. **Install Dependencies:**
 
    - Ensure that you have `json-server` installed and running on port 9000. If not, refer to Exercise 12 for setup instructions.
      > Note you will still need `npm start` running in a separate terminal to server the front-end React code
 
-2. **Update `teamAPI` to Use the REST API:**
+1. **Update `teamAPI` to Use the REST API:**
 
    - Modify the `teamAPI.list` function to fetch data from your `json-server` API.
    - Use the `fetchUtilities.js` functions `checkStatus` and `parseJSON` to handle the HTTP response and errors.
 
-3. **Handle API Errors:**
+1. **Handle API Errors:**
 
    - Update the `App` component to display user-friendly error messages if the API request fails. Use state to store and display any error messages.
 
-4. **Enhance the Component:**
+1. **Enhance the Component:**
 
    - Ensure that the component displays loading status, fetches data from the REST API, and handles any errors appropriately.
 
-5. **Verify the Application:**
+1. **Verify the Application:**
    - Run your application and verify that the NBA teams are fetched from the REST API and displayed correctly. Check for proper error handling and user messages.
 
 <!-- #### Final Code Solution:
