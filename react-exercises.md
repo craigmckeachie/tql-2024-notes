@@ -1316,6 +1316,104 @@ Here's the revised Exercise 14 without starter code and with an added final veri
 
 In this exercise, you'll set up routing in your React application using React Router. Follow the steps below to complete the exercise.
 
+Here is a similar example to use as a reference. I would recommend not starting with this code but referencing it for syntax.
+
+```js
+//main.js
+
+const {
+  BrowserRouter: Router,
+  Route,
+  Routes,
+  Link,
+  NavLink,
+  Navigate,
+  useParams,
+  useLocation,
+  useNavigation,
+} = window.ReactRouterDOM;
+
+function HomePage() {
+  return <h2>Home</h2>;
+}
+
+function AboutPage() {
+  return <h2>About</h2>;
+}
+
+function ContactPage() {
+  return <h2>Contact</h2>;
+}
+
+function App() {
+  return (
+    <Router>
+      <div className="container">
+        <nav className="my-4 mb-5">
+          <ul className="nav nav-pills">
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/">
+                Home
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/about">
+                About
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/contact">
+                Contact
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="contact" element={<ContactPage />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+```
+
+```html
+<!DOCTYPE html>
+<!-- index.html -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Demos</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script src="/node_modules/react/umd/react.development.js"></script>
+    <script src="/node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="/node_modules/react-hook-form/dist/index.umd.js"></script>
+    <script src="/node_modules/history/umd/history.development.js"></script>
+    <script src="/node_modules/react-router/umd/react-router.development.js"></script>
+    <script src="/node_modules/react-router-dom/umd/react-router-dom.development.js"></script>
+
+    <script src="/node_modules/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel" src="/main.js"></script>
+  </body>
+</html>
+```
+
 ### Steps:
 
 1. **Install React Router**
