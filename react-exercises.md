@@ -1060,7 +1060,7 @@ In this exercise, you'll set up a REST API using `json-server` to simulate fetch
 
 4. **Start the JSON Server:**
 
-   - Run the following command in your project directory to start the server:
+   - Open a new terminal window (leave `npm start` running) and run the following command in your project directory to start the server:
      ```bash
      npm run api
      ```
@@ -1176,7 +1176,7 @@ In this exercise, you will update the `teamAPI` to fetch data from a REST API se
 1. **Install Dependencies:**
 
    - Ensure that you have `json-server` installed and running on port 9000. If not, refer to Exercise 12 for setup instructions.
-     > Note you will still need `npm start` running in a separate terminal to server the front-end React code
+     > Note you will still need `npm start` running in a separate terminal to serve the front-end React code
 
 1. **Update `teamAPI` to Use the REST API:**
 
