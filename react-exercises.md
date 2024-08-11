@@ -1045,64 +1045,15 @@ In this exercise, you will update the `teamAPI` to fetch data from a REST API se
 
    You will start with the following code in `main.js`:
 
-   > This is the solution code from exercise 7
+   > This is the essentially the solution code from exercise 7 but it has been modified to use Bootstrap and include some helper functions for making HTTP calls
 
    ```js
+   //main.js
    const { useState, useEffect } = React;
 
-   const nbaTeams = [
-     { name: "Los Angeles Lakers", division: "Pacific" },
-     { name: "Chicago Bulls", division: "Central" },
-     { name: "Miami Heat", division: "Southeast" },
-     { name: "Dallas Mavericks", division: "Southwest" },
-   ];
+   const BASE_URL = "http://localhost:9000";
 
-   const teamAPI = {
-     list() {
-       return new Promise((resolve) => {
-         setTimeout(() => {
-           resolve(nbaTeams);
-         }, 1000);
-       });
-     },
-   };
-
-   function App() {
-     const [busy, setBusy] = useState(false);
-     const [teams, setTeams] = useState([]);
-     async function loadTeams() {
-       setBusy(true);
-       let data = await teamAPI.list();
-       setBusy(false);
-       setTeams(data);
-     }
-
-     useEffect(function () {
-       loadTeams();
-     }, []);
-
-     return (
-       <div>
-         {busy && <p>Loading...</p>}
-         {teams?.map((team) => (
-           <div className="card" key={team.name}>
-             <strong>{team.name}</strong>
-             <div>{team.division}</div>
-           </div>
-         ))}
-       </div>
-     );
-   }
-
-   ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-   ```
-
-   Add a `fetchUtilities.js` file to the root project folder with the following code:
-
-   ```js
-   export const BASE_URL = "http://localhost:9000";
-
-   export function translateStatusToErrorMessage(status) {
+   function translateStatusToErrorMessage(status) {
      switch (status) {
        case 401:
          return "Please sign in again.";
@@ -1113,7 +1064,7 @@ In this exercise, you will update the `teamAPI` to fetch data from a REST API se
      }
    }
 
-   export async function checkStatus(response) {
+   async function checkStatus(response) {
      if (response.ok) return response;
 
      const httpError = {
@@ -1128,93 +1079,238 @@ In this exercise, you will update the `teamAPI` to fetch data from a REST API se
      throw new Error(errorMessage);
    }
 
-   export function parseJSON(response) {
+   function parseJSON(response) {
      return response.json();
    }
 
-   export function delay(ms) {
+   function delay(ms) {
      return function (x) {
        return new Promise((resolve) => setTimeout(() => resolve(x), ms));
      };
    }
+
+   const url = `${BASE_URL}/teams`;
+   const teamAPI = {
+     list() {
+       return fetch(url).then(checkStatus).then(parseJSON);
+     },
+   };
+
+   function TeamList() {
+     const [busy, setBusy] = useState(false);
+     const [teams, setTeams] = useState([]);
+     async function loadTeams() {
+       setBusy(true);
+       let data = await teamAPI.list();
+       setBusy(false);
+       setTeams(data);
+     }
+
+     useEffect(function () {
+       loadTeams();
+     }, []);
+
+     return (
+       <div className="list mt-2">
+         {busy && <p>Loading...</p>}
+         {teams?.map((team) => (
+           <div className="card p-4" key={team.name}>
+             <strong>{team.name}</strong>
+             <div>{team.division}</div>
+           </div>
+         ))}
+       </div>
+     );
+   }
+
+   function App() {
+     return (
+       <div className="container">
+         <TeamList />
+       </div>
+     );
+   }
+
+   ReactDOM.createRoot(document.getElementById("root")).render(<App />);
    ```
 
-1. **Install Dependencies:**
+   ```css
+   .list {
+     display: flex;
+     gap: 2rem;
+     flex-wrap: wrap;
+   }
 
-   - Ensure that you have `json-server` installed and running on port 9000. If not, refer to Exercise 12 for setup instructions.
-     > Note you will still need `npm start` running in a separate terminal to serve the front-end React code
+   .card {
+     width: 18rem;
+   }
+   ```
 
-1. **Update `teamAPI` to Use the REST API:**
+2. **Install Dependencies:**
 
-   - Modify the `teamAPI.list` function to fetch data from your `json-server` API.
-   - Use the `fetchUtilities.js` functions `checkStatus` and `parseJSON` to handle the HTTP response and errors.
+- Ensure that you have `json-server` running on port 9000. If not, refer to Exercise 12 for the command to start it.
+  > Note you will still need `npm start` running in a separate terminal to serve the front-end React code
 
-1. **Handle API Errors:**
+3. **Update `teamAPI` to Use the REST API:**
 
-   - Update the `App` component to display user-friendly error messages if the API request fails. Use state to store and display any error messages.
+- Modify the `teamAPI.list` function to fetch data from your `json-server` API.
+- Use the provided functions `checkStatus` and `parseJSON` to handle the HTTP response and errors. Be sure to understand what they are doing and
 
-1. **Enhance the Component:**
+4. **Handle API Errors:**
 
-   - Ensure that the component displays loading status, fetches data from the REST API, and handles any errors appropriately.
+- Update the `MovieList` component to display the error message if the API request fails. Use state to store and display any error messages.
+  - The `error` that comes back from the API will have a `message` property which is what you will want to display
 
-1. **Verify the Application:**
-   - Run your application and verify that the NBA teams are fetched from the REST API and displayed correctly. Check for proper error handling and user messages.
+5. **Enhance the Component:**
+
+- Ensure that the component displays loading status, fetches data from the REST API, and handles any errors appropriately.
+
+6. **Verify the Application:**
+
+- Run your application and verify that the NBA teams are fetched from the REST API and displayed correctly. Check for proper error handling and user messages.
 
 <!-- #### Final Code Solution:
 
-```js
-import { BASE_URL, checkStatus, parseJSON } from './fetchUtilities.js';
+    ```js
+    //main.js
+    const { useState, useEffect } = React;
 
-const { useState, useEffect } = React;
+    const BASE_URL = "http://localhost:9000";
 
-const teamAPI = {
-  list() {
-    return fetch(`${BASE_URL}/teams`)
-      .then(checkStatus)
-      .then(parseJSON);
-  },
-};
-
-function App() {
-  const [busy, setBusy] = useState(false);
-  const [teams, setTeams] = useState([]);
-  const [error, setError] = useState(null);
-
-  async function loadTeams() {
-    setBusy(true);
-    setError(null);
-    try {
-      let data = await teamAPI.list();
-      setTeams(data);
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setBusy(false);
+    function translateStatusToErrorMessage(status) {
+      switch (status) {
+        case 401:
+          return "Please sign in again.";
+        case 403:
+          return "You do not have permission to view the data requested.";
+        default:
+          return "There was an error saving or retrieving data.";
+      }
     }
-  }
 
-  useEffect(function () {
-    loadTeams();
-  }, []);
+    async function checkStatus(response) {
+      if (response.ok) return response;
 
-  return (
-    <div>
-      {busy && <p>Loading...</p>}
-      {error && <p className="alert alert-danger">{error}</p>}
-      {teams?.map((team) => (
-        <div className="card" key={team.id}>
-          <strong>{team.name}</strong>
-          <div>{team.division}</div>
+      const httpError = {
+        status: response.status,
+        statusText: response.statusText,
+        url: response.url,
+        body: await response.text(),
+      };
+      console.log(`http error status: ${JSON.stringify(httpError, null, 1)}`);
+
+      let errorMessage = translateStatusToErrorMessage(httpError.status);
+      throw new Error(errorMessage);
+    }
+
+    function parseJSON(response) {
+      return response.json();
+    }
+
+    function delay(ms) {
+      return function (x) {
+        return new Promise((resolve) => setTimeout(() => resolve(x), ms));
+      };
+    }
+
+    const url = `${BASE_URL}/teams`;
+    const teamAPI = {
+      list() {
+        return fetch(url).then(checkStatus).then(parseJSON);
+      },
+    };
+
+    function TeamList() {
+      const [busy, setBusy] = useState(false);
+      const [teams, setTeams] = useState([]);
+      const [errorMessage, setErrorMessage] = useState(undefined);
+
+      async function loadTeams() {
+        try {
+          setBusy(true);
+          let data = await teamAPI.list();
+          setBusy(false);
+          setTeams(data);
+        } catch (error) {
+          setErrorMessage(error.message);
+        } finally {
+          setBusy(false);
+        }
+      }
+
+      useEffect(function () {
+        loadTeams();
+      }, []);
+
+      return (
+        <div className="list mt-2">
+          {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
+          {busy && <p>Loading...</p>}
+          {teams?.map((team) => (
+            <div className="card p-4" key={team.name}>
+              <strong>{team.name}</strong>
+              <div>{team.division}</div>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-  );
-}
+      );
+    }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-``` -->
+    function App() {
+      return (
+        <div className="container">
+          <TeamList />
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    ```
+
+    ```html
+    <!DOCTYPE html>
+    <!-- index.html -->
+
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>React Demos</title>
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+        />
+        <link rel="stylesheet" href="styles.css" />
+      </head>
+      <body>
+        <div id="root"></div>
+
+        <script src="/node_modules/react/umd/react.development.js"></script>
+        <script src="/node_modules/react-dom/umd/react-dom.development.js"></script>
+        <script src="/node_modules/react-hook-form/dist/index.umd.js"></script>
+        <script src="/node_modules/@babel/standalone/babel.min.js"></script>
+        <script type="text/babel" src="/main.js"></script>
+      </body>
+    </html>
+    ```
+
+    ```css
+    .list {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      width: 18rem;
+    }
+    ``` -->
 
 ## Exercise 14: Router
+
+```
+
+```
 
 ```
 
