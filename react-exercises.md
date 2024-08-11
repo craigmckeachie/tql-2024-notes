@@ -365,11 +365,11 @@ This exercise demonstrates how to handle asynchronous data fetching and display 
    - Define the `.card` class in `styles.css` with the following styles:
 
      ```css
-      .list {
-        display: flex;
-        gap: 2rem;
-        flex-wrap: wrap;
-      }
+     .list {
+       display: flex;
+       gap: 2rem;
+       flex-wrap: wrap;
+     }
 
      .card {
        border: 1px solid lightgray;
@@ -882,7 +882,7 @@ In this exercise, you'll use React Hook Form to handle form validation and displ
 
 ---
 
-#### `main.js`
+<!-- #### `main.js`
 
 ```js
 const { useForm } = window.ReactHookForm;
@@ -970,7 +970,7 @@ function App() {
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-```
+``` -->
 
 ### Exercise 12: Setting Up a REST API with json-server
 
