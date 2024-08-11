@@ -483,11 +483,15 @@ In this exercise, you'll build a Contact Us form with state management for multi
    - Implement the `handleSubmit` function to prevent the default form submission behavior using `event.preventDefault()`.
    - Inside `handleSubmit`, log the form data to the console by converting the state to a string using the `stateToString` function.
 
-4. **Testing the Form:**
+4. **State to String Conversion:**
+
+   - Implement a `stateToString` function to convert the form state into a JSON string for logging to the page.
+
+5. **Testing the Form:**
 
    - Run the application and verify that the form behaves as expected:
      - When you select a department, enter a message, and check the "I agree to the terms and conditions" checkbox, the form state should update accordingly.
-     - When you click "Send," the form data should be logged to the console as a JSON string.
+     - When you click "Send," the form data should be logged to the console as a JSON string by calling the `stateToString()` function.
 
    #### `main.js`
 
@@ -500,6 +504,18 @@ In this exercise, you'll build a Contact Us form with state management for multi
      function handleSubmit(event) {
        event.preventDefault();
        console.log("submitting", stateToString());
+     }
+
+     function stateToString() {
+       return JSON.stringify(
+         {
+           department,
+           message,
+           agreedToTerms,
+         },
+         null,
+         " "
+       );
      }
 
      return (
