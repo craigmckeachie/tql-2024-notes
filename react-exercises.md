@@ -17,6 +17,7 @@
   - [Exercise 14: Router](#exercise-14-router)
     - [Steps:](#steps-1)
     - [Tips:](#tips)
+  - [Exercise 15: Route Parameters](#exercise-15-route-parameters)
 
 ## Exercise 1: First Component
 
@@ -1312,6 +1313,8 @@ Here's the revised Exercise 14 without starter code and with an added final veri
 
 ---
 
+Here is the refactored Exercise 14 with the updated page names:
+
 ## Exercise 14: Router
 
 In this exercise, you'll set up routing in your React application using React Router. Follow the steps below to complete the exercise.
@@ -1434,7 +1437,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 
 3. **Create Components**
 
-   Define three components for your pages: `HomePage`, `MoviesPage`, and `ActorsPage`. Each should return a simple `h2` element with the page name.
+   Define three components for your pages: `HomePage`, `TeamsPage`, and `PlayersPage`. Each should return a simple `h2` element with the page name.
 
 4. **Set Up Router**
 
@@ -1442,13 +1445,13 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 
    - Import `BrowserRouter`, `Routes`, and `Route` from `react-router-dom`.
    - Wrap your component tree with `BrowserRouter`.
-   - Use `Routes` and `Route` to define routes for `/`, `/movies`, and `/actors`.
+   - Use `Routes` and `Route` to define routes for `/`, `/teams`, and `/players`.
 
 5. **Add Navigation**
 
    Create a navigation bar inside your `App` component:
 
-   - Use `NavLink` from `react-router-dom` to create links for "Home", "Movies", and "Actors".
+   - Use `NavLink` from `react-router-dom` to create links for "Home", "Teams", and "Players".
    - Style the navigation bar using Bootstrap classes.
 
 6. **Render the Application**
@@ -1460,8 +1463,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
    Open your browser and navigate to the following URLs to verify that routing works as expected:
 
    - `/` should display the Home page.
-   - `/movies` should display the Movies page.
-   - `/actors` should display the Actors page.
+   - `/teams` should display the Teams page.
+   - `/players` should display the Players page.
 
    Ensure that the navigation links correctly switch between these pages and that the current page is highlighted in the navigation.
 
@@ -1474,8 +1477,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 
 This guide provides step-by-step instructions, allowing students to build the routing setup and verify their implementation.
 
-<!-- #### Solution Code
-
+#### Solution Code
 
 Here’s the final solution code for Exercise 14:
 
@@ -1498,12 +1500,12 @@ function HomePage() {
   return <h2>Home</h2>;
 }
 
-function MoviesPage() {
-  return <h2>Movies</h2>;
+function TeamsPage() {
+  return <h2>Teams</h2>;
 }
 
-function ActorsPage() {
-  return <h2>Actors</h2>;
+function PlayersPage() {
+  return <h2>Players</h2>;
 }
 
 function App() {
@@ -1518,13 +1520,13 @@ function App() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/movies">
-                Movies
+              <NavLink className="nav-link" to="/teams">
+                Teams
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/actors">
-                Actors
+              <NavLink className="nav-link" to="/players">
+                Players
               </NavLink>
             </li>
           </ul>
@@ -1533,8 +1535,8 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="movies" element={<MoviesPage />} />
-            <Route path="actors" element={<ActorsPage />} />
+            <Route path="teams" element={<TeamsPage />} />
+            <Route path="players" element={<PlayersPage />} />
           </Routes>
         </div>
       </div>
@@ -1574,4 +1576,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
     <script type="text/babel" src="/main.js"></script>
   </body>
 </html>
-``` -->
+```
+
+## Exercise 15: Route Parameters
+
+1. Integrate the code from exercise 13 for the `TeamList` into `main.js` (this would include the movieAPI and the helper functions for calling it). Render the `MovieList` component inside of the `TeasmsPage` component.
+2. Add an **Add Movie** button
