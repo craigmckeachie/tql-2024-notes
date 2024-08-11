@@ -582,7 +582,8 @@ In this exercise, you will create a contact form in React that includes validati
 
 3. **Set Up the Contact Form Component:**
 
-   - Create a `ContactUsForm` component and include the following state variables using `React.useState`:
+   - Create a `ContactUsForm` component and include the following state variables using the `useState` hook:
+     - you will need this statement `const { useState } = React;` at the top of the file so you just use `useState` instead of `React.useState`
      - `department` for the selected department.
      - `message` for the message text.
      - `agreedToTerms` for the checkbox indicating agreement to terms.
