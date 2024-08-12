@@ -1483,7 +1483,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 
 This guide provides step-by-step instructions, allowing students to build the routing setup and verify their implementation.
 
-#### Solution Code
+<!-- #### Solution Code
 
 Here’s the final solution code for Exercise 14:
 
@@ -1582,7 +1582,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
     <script type="text/babel" src="/main.js"></script>
   </body>
 </html>
-```
+``` -->
 
 ## Exercise 14: Route Parameters
 
