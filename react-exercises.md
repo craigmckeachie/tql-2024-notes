@@ -1457,11 +1457,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
    - Use `NavLink` from `react-router-dom` to create links for "Home", "Teams", and "Players".
    - Style the navigation bar using Bootstrap classes.
 
-6. **Render the Application**
 
-   Render the `App` component inside the `index.html` file.
-
-7. **Verify the Application**
+6. **Verify the Application**
 
    Open your browser and navigate to the following URLs to verify that routing works as expected:
 
@@ -1480,7 +1477,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 
 This guide provides step-by-step instructions, allowing students to build the routing setup and verify their implementation.
 
-<!-- #### Solution Code
+#### Solution Code
 
 Here’s the final solution code for Exercise 14:
 
@@ -1579,7 +1576,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
     <script type="text/babel" src="/main.js"></script>
   </body>
 </html>
-``` -->
+```
 
 ## Exercise 14: Route Parameters
 
