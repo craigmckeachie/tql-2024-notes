@@ -1178,10 +1178,10 @@ In this exercise, you will update the `teamAPI` to fetch data from a REST API se
 
 - Run your application and verify that the NBA teams are fetched from the REST API and displayed correctly. Check for proper error handling and user messages.
 
-<!-- #### Final Code Solution:
+#### Final Code Solution:
 
+<!--
     ```js
-    //main.js
     const { useState, useEffect } = React;
 
     const BASE_URL = "http://localhost:9000";
@@ -1274,52 +1274,52 @@ In this exercise, you will update the `teamAPI` to fetch data from a REST API se
     }
 
     ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-    ```
-
-    ```html
-    <!DOCTYPE html>
-    <!-- index.html -->
-
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>React Demos</title>
-        <link
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-        />
-        <link rel="stylesheet" href="styles.css" />
-      </head>
-      <body>
-        <div id="root"></div>
-
-        <script src="/node_modules/react/umd/react.development.js"></script>
-        <script src="/node_modules/react-dom/umd/react-dom.development.js"></script>
-        <script src="/node_modules/react-hook-form/dist/index.umd.js"></script>
-        <script src="/node_modules/@babel/standalone/babel.min.js"></script>
-        <script type="text/babel" src="/main.js"></script>
-      </body>
-    </html>
-    ```
-
-    ```css
-    .list {
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .card {
-      width: 18rem;
-    }
     ``` -->
+<!--
+    #### HTML
+
+  ```html
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>React Demos</title>
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+      />
+      <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+      <div id="root"></div>
+
+      <script src="/node_modules/react/umd/react.development.js"></script>
+      <script src="/node_modules/react-dom/umd/react-dom.development.js"></script>
+      <script src="/node_modules/react-hook-form/dist/index.umd.js"></script>
+      <script src="/node_modules/@babel/standalone/babel.min.js"></script>
+      <script type="text/babel" src="/main.js"></script>
+    </body>
+  </html>
+  ``` -->
+
+<!-- #### CSS
+
+```css
+.list {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 18rem;
+}
+``` -->
 
 Here's the revised Exercise 14 without starter code and with an added final verification step:
 
 ---
-
-Here is the refactored Exercise 14 with the updated page names:
 
 ## Exercise 13: Router
 
