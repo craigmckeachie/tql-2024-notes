@@ -1580,24 +1580,24 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
    - use the React Router `Link` component and not a regular `a` tag
    - use the appropriate bootstrap classes to make the link look like a button
    - have the button go to a new route `teams/create` which we will create later
-3. Create an `CreateTeamPage` component
+3. Create an `TeamCreatePage` component
    - it should just have a heading which contains **Add Team**
-4. Add a `Route` to send `teams/create` to the `CreateTeamPage` component
+4. Add a `Route` to send `teams/create` to the `TeamCreatePage` component
 5. Test to verify that the `Link` works correctly and takes the user to the new page component
 6. Add an **Edit Team** link to each card in the `TeamsList`
    - use the React Router `Link` component and not a regular `a` tag
    - this should look like a link and not a Bootstrap button so no need to add any CSS classes
    - have the link go to a new route passing the team id of the current team, for example: `teams/edit/5`
-7. Create an `EditTeamPage` component
+7. Create an `TeamEditPage` component
    - it should just have a heading which contains **Edit Team**
-8. Add a `Route` to send the url `teams/edit/:id` to the `EditTeamPage` component
+8. Add a `Route` to send the url `teams/edit/:id` to the `TeamEditPage` component
 9. Test to verify that the `Link` works correctly and takes the user to the edit page component
 
 ## Exercise 15: More Forms Practice
 
 1. Create a `TeamForm` component
    - it should return a `form` tag and inside the form should be one label for **Team Name** and an input
-2. Render the `TeamForm` inside both the `CreateTeamPage` and `EditTeamPage` components
+2. Render the `TeamForm` inside both the `TeamCreatePage` and `TeamPage` components
 3. Verify the form displays on each page
 4. Add all the other needed form fields for a team based on the properties of the `team` object
 5. Use React Hook Form to
