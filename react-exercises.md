@@ -1317,8 +1317,6 @@ In this exercise, you will update the `teamAPI` to fetch data from a REST API se
 }
 ``` -->
 
-Here's the revised Exercise 14 without starter code and with an added final verification step:
-
 ---
 
 ## Exercise 13: Router
