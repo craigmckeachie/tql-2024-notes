@@ -10,16 +10,16 @@
   - [Exercise 7: Async Data Fetching](#exercise-7-async-data-fetching)
   - [Exercise 8: Forms](#exercise-8-forms)
   - [Exercise 9: Form Validation](#exercise-9-form-validation)
-    - [Exercise 10: Refactor Form with React Hook Form](#exercise-10-refactor-form-with-react-hook-form)
+  - [Exercise 10: Refactor Form with React Hook Form](#exercise-10-refactor-form-with-react-hook-form)
     - [Steps:](#steps)
-  - [Exercise 10: Setting Up a REST API](#exercise-10-setting-up-a-rest-api)
-  - [Exercise 11: GET from REST API](#exercise-11-get-from-rest-api)
-  - [Exercise 12: Router](#exercise-12-router)
+  - [Exercise 11: Setting Up a REST API](#exercise-11-setting-up-a-rest-api)
+  - [Exercise 12: GET from REST API](#exercise-12-get-from-rest-api)
+  - [Exercise 13: Router](#exercise-13-router)
     - [Steps:](#steps-1)
     - [Tips:](#tips)
-  - [Exercise 13: Route Parameters](#exercise-13-route-parameters)
-  - [Exercise 14: More Forms Practice](#exercise-14-more-forms-practice)
-  - [Exercise 15](#exercise-15)
+  - [Exercise 14: Route Parameters](#exercise-14-route-parameters)
+  - [Exercise 15: More Forms Practice](#exercise-15-more-forms-practice)
+  - [Exercise 16](#exercise-16)
 
 ## Exercise 1: First Component
 
@@ -763,7 +763,7 @@ Here's the revised set of steps for the exercise, including the hint for using `
 
 ---
 
-### Exercise 10: Refactor Form with React Hook Form
+## Exercise 10: Refactor Form with React Hook Form
 
 **Objective:** Transition an existing form to use React Hook Form for managing form state and validation.
 
@@ -959,7 +959,7 @@ Here's the revised set of steps for the exercise, including the hint for using `
    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
    ``` -->
 
-## Exercise 10: Setting Up a REST API
+## Exercise 11: Setting Up a REST API
 
 In this exercise, you'll set up a REST API using `json-server` to simulate fetching data for an NBA teams application.
 
@@ -1042,7 +1042,7 @@ In this exercise, you'll set up a REST API using `json-server` to simulate fetch
 
 With this setup, you now have a `json-server` instance running that provides a REST API for NBA teams.
 
-## Exercise 11: GET from REST API
+## Exercise 12: GET from REST API
 
 In this exercise, you will update the `teamAPI` to fetch data from a REST API served by `json-server` and handle errors gracefully using utility functions.
 
@@ -1317,7 +1317,7 @@ Here's the revised Exercise 14 without starter code and with an added final veri
 
 Here is the refactored Exercise 14 with the updated page names:
 
-## Exercise 12: Router
+## Exercise 13: Router
 
 In this exercise, you'll set up routing in your React application using React Router. Follow the steps below to complete the exercise.
 
@@ -1580,7 +1580,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 </html>
 ```
 
-## Exercise 13: Route Parameters
+## Exercise 14: Route Parameters
 
 1. Integrate the code from exercise 13 for the `TeamList` into `main.js` (this would include the movieAPI and the helper functions for calling it). Render the `TeamList` component inside of the `TeamsPage` component.
 2. Add an **Add Team** link to the `TeamsPage` at the top next the **Teams** heading
@@ -1600,7 +1600,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 8. Add a `Route` to send the url `teams/edit/:id` to the `EditTeamPage` component
 9. Test to verify that the `Link` works correctly and takes the user to the edit page component
 
-## Exercise 14: More Forms Practice
+## Exercise 15: More Forms Practice
 
 1. Create a `TeamForm` component
    - it should return a `form` tag and inside the form should be one label for **Team Name** and an input
@@ -1613,7 +1613,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
    - Handle the submission of the form and log out the data
 6. Verify the form data is logged and the validation displays error messages at the appropriate times
 
-## Exercise 15
+## Exercise 16
 
 1. Add additional functions to the `teamAPI` object to insert and update the team data
 2. Use the add(post) function in the `TeamForm`in the form submit event handler function to take the data from React Hook form and save it to the backend API.
