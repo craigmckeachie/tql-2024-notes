@@ -1097,7 +1097,11 @@ In this exercise, you will update the `teamAPI` to fetch data from a REST API se
    const url = `${BASE_URL}/teams`;
    const teamAPI = {
      list() {
-       return fetch(url).then(checkStatus).then(parseJSON);
+       return new Promise((resolve) => {
+         setTimeout(() => {
+           resolve(nbaTeams);
+         }, 1000);
+       });
      },
    };
 
@@ -1159,11 +1163,11 @@ In this exercise, you will update the `teamAPI` to fetch data from a REST API se
 3. **Update `teamAPI` to Use the REST API:**
 
 - Modify the `teamAPI.list` function to fetch data from your `json-server` API.
-- Use the provided functions `checkStatus` and `parseJSON` to handle the HTTP response and errors. Be sure to understand what they are doing and
+- Use the provided functions `checkStatus` and `parseJSON` to handle the HTTP response and errors. Be sure to understand what they are doing and how to use them.
 
 4. **Handle API Errors:**
 
-- Update the `MovieList` component to display the error message if the API request fails. Use state to store and display any error messages.
+- Update the `TeamList` component to display the error message if the API request fails. Use state to store and display any error messages.
   - The `error` that comes back from the API will have a `message` property which is what you will want to display
 
 5. **Enhance the Component:**
