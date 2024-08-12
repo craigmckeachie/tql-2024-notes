@@ -840,7 +840,7 @@ Here's the revised set of steps for the exercise, including the hint for using `
      }
      ```
 
-<!-- 6. **Solution:**
+6. **Solution:**
    Once finished, your code should look like the following:
 
    ```html
@@ -957,7 +957,7 @@ Here's the revised set of steps for the exercise, including the hint for using `
    }
 
    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-   ``` -->
+   ```
 
 ## Exercise 11: Setting Up a REST API
 
@@ -1180,7 +1180,6 @@ In this exercise, you will update the `teamAPI` to fetch data from a REST API se
 
 #### Final Code Solution:
 
-<!--
     ```js
     const { useState, useEffect } = React;
 
@@ -1274,36 +1273,36 @@ In this exercise, you will update the `teamAPI` to fetch data from a REST API se
     }
 
     ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-    ``` -->
-<!--
+    ```
+
     #### HTML
 
-  ```html
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>React Demos</title>
-      <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-      />
-      <link rel="stylesheet" href="styles.css" />
-    </head>
-    <body>
-      <div id="root"></div>
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Demos</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="root"></div>
 
-      <script src="/node_modules/react/umd/react.development.js"></script>
-      <script src="/node_modules/react-dom/umd/react-dom.development.js"></script>
-      <script src="/node_modules/react-hook-form/dist/index.umd.js"></script>
-      <script src="/node_modules/@babel/standalone/babel.min.js"></script>
-      <script type="text/babel" src="/main.js"></script>
-    </body>
-  </html>
-  ``` -->
+    <script src="/node_modules/react/umd/react.development.js"></script>
+    <script src="/node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="/node_modules/react-hook-form/dist/index.umd.js"></script>
+    <script src="/node_modules/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel" src="/main.js"></script>
+  </body>
+</html>
+```
 
-<!-- #### CSS
+#### CSS
 
 ```css
 .list {
@@ -1315,7 +1314,7 @@ In this exercise, you will update the `teamAPI` to fetch data from a REST API se
 .card {
   width: 18rem;
 }
-``` -->
+```
 
 ---
 
